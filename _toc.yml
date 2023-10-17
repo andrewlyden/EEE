@@ -3,12 +3,16 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: intro_and_definitions
-- file: consumer_theory
-- file: producer_theory
-- file: equilibrium
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
-- file: mymarkdownfile
+parts:
+  - caption: Intro to Economic Theory
+    chapters:
+    - file: intro_and_definitions
+    - file: consumer_theory
+    - file: producer_theory
+    - file: equilibrium
+  - caption: Extra
+    chapters:
+    - file: markdown
+    - file: notebooks
+    - file: markdown-notebooks
+    - file: mymarkdownfilegit 
