@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Welcome &#8212; Energy and Environmental Economics</title>
+    <title>Consumer Theory &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -62,10 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'consumer_theory';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction and Definitions" href="intro_and_definitions.html" />
+    <link rel="next" title="Producer Theory" href="producer_theory.html" />
+    <link rel="prev" title="Introduction and Definitions" href="intro_and_definitions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -140,7 +141,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -159,15 +160,15 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Welcome
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_and_definitions.html">Introduction and Definitions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="consumer_theory.html">Consumer Theory</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Consumer Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="producer_theory.html">Producer Theory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="equilibrium.html">Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="markdown.html">Markdown Files</a></li>
@@ -245,7 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2Fconsumer_theory.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -275,7 +276,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/consumer_theory.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -357,7 +358,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome</h1>
+    <h1>Consumer Theory</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -367,10 +368,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-budget-constraint">The budget constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indifference-curves">Indifference curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utility">Utility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-afforable-bundle">The best afforable bundle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-demand-function">The demand function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-individual-demand-function-to-the-aggregate-demand-function">From the individual demand function to the aggregate demand function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demand-curves-vs-inverse-demand-functions">Demand curves vs. inverse demand functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumer-surplus">Consumer surplus</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -381,25 +387,41 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome">
-<h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this heading">#</a></h1>
-<p>Welcome to Energy &amp; Environmental Economics! Through this course, you will get a basic understanding of key microeconomic theories, the way energy markets function, and the economic aspects of environmental problems. This website accompanies the material available on Learn.</p>
-<p>This course consists of three blocks. The first will give you an introduction to (mainly micro-) economic theory. The second will use these theories and apply them to environmental problems. The third applies economic theory to energy markets.</p>
-<p>Learn is where any changes or other announcements will be published, so check the Learn page regularly and/or set up email notifications of changes.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="consumer-theory">
+<h1>Consumer Theory<a class="headerlink" href="#consumer-theory" title="Permalink to this heading">#</a></h1>
+<p>Consider a consumer who, in a particular period, spends their entire income on just two things:food and fuel. For simplicity, we assume that only this period matters, i.e., the consumer does notthink about the future, and money has no value in itself. This simple model can easily be gener-alised to more products, but it then becomes hard to draw pictures. Since we are often interestedin markets for particular products, we might group all other products into a composite good thatrepresents everything else. The simple two-dimensional examples below can then still be used,with one good being the good of interest, and the other good representing a composite good called“everything else” - you’d still only spend your money on these two things. The models can also begeneralised to include more time periods, but this is beyond the scope of this course.</p>
+<section id="the-budget-constraint">
+<h2>The budget constraint<a class="headerlink" href="#the-budget-constraint" title="Permalink to this heading">#</a></h2>
+<p>Our consumer can spend her money on food, fuel, or a combination of both. A particular combina-tion of goods, in this case, a combination of some units of fuel and some units of food, is called abasket or bundle. She cannot spend more then her income (= her budget). We can visualise this bydrawing a budget constraint, as in the diagram below. Our consumer can spend her entire incomeon fuel (in which case she can buy a maximum of BudgetPrice per unit of fuel units of fuel), her entire income onfood (in which case she can buy a maximum of BudgetPrice per unit of food units of food), or a combination ofthe two. She can afford any basket on the budget constraint or below it.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="learning-outcomes">
-<h1>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this heading">#</a></h1>
-<p>On successful completion of this course, you should be able to:</p>
-<ol class="arabic simple">
-<li><p>Understand and apply the main economic theories and concepts underlying environmental and energy economics, including the theories of consumer and producer behaviour, welfare  theory, and theories of industry structure.</p></li>
-<li><p>Understand and reflect on different methods to value environmental goods, and on the use of these valuations in environmental cost-benefit analysis.</p></li>
-<li><p>Critically discuss previous, existing, and potential future pollution control measures.</p></li>
-<li><p>Understand and critically evaluate the functioning of different types of energy markets, future challenges to these markets, and their relevance to engineering problems.</p></li>
-<li><p>Describe and discuss important ethical issues in energy markets and environmental valuation, and their implications for good practice and policy.</p></li>
-</ol>
-<p>Refer to this for help - <a class="reference external" href="https://jupyterbook.org/en/stable/start/publish.html">https://jupyterbook.org/en/stable/start/publish.html</a>.</p>
-<div class="toctree-wrapper compound">
-</div>
+<section id="indifference-curves">
+<h2>Indifference curves<a class="headerlink" href="#indifference-curves" title="Permalink to this heading">#</a></h2>
+<p>o far, we have only looked at the combinations of goods the consumer can choose. We now need adescription of the consumer’s preferences to predict which particular one she will choose. We canvisualise a consumer’s preferences using indifference curves</p>
+</section>
+<section id="utility">
+<h2>Utility<a class="headerlink" href="#utility" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
+<section id="the-best-afforable-bundle">
+<h2>The best afforable bundle<a class="headerlink" href="#the-best-afforable-bundle" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
+<section id="the-demand-function">
+<h2>The demand function<a class="headerlink" href="#the-demand-function" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
+<section id="from-the-individual-demand-function-to-the-aggregate-demand-function">
+<h2>From the individual demand function to the aggregate demand function<a class="headerlink" href="#from-the-individual-demand-function-to-the-aggregate-demand-function" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
+<section id="demand-curves-vs-inverse-demand-functions">
+<h2>Demand curves vs. inverse demand functions<a class="headerlink" href="#demand-curves-vs-inverse-demand-functions" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
+<section id="consumer-surplus">
+<h2>Consumer surplus<a class="headerlink" href="#consumer-surplus" title="Permalink to this heading">#</a></h2>
+<p>W</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -432,12 +454,21 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="right-next"
+    <a class="left-prev"
        href="intro_and_definitions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction and Definitions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="producer_theory.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction and Definitions</p>
+        <p class="prev-next-title">Producer Theory</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -456,10 +487,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning Outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-budget-constraint">The budget constraint</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indifference-curves">Indifference curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#utility">Utility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-best-afforable-bundle">The best afforable bundle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-demand-function">The demand function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-the-individual-demand-function-to-the-aggregate-demand-function">From the individual demand function to the aggregate demand function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demand-curves-vs-inverse-demand-functions">Demand curves vs. inverse demand functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consumer-surplus">Consumer surplus</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
