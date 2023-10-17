@@ -7,6 +7,7 @@ This course consists of three blocks. The first will give you an introduction to
 Learn is where any changes or other announcements will be published, so check the Learn page regularly and/or set up email notifications of changes.
 
 # Learning Outcomes
+
 On successful completion of this course, you should be able to:
 
 1. Understand and apply the main economic theories and concepts underlying environmental and energy economics, including the theories of consumer and producer behaviour, welfare  theory, and theories of industry structure.
@@ -14,3 +15,5 @@ On successful completion of this course, you should be able to:
 3. Critically discuss previous, existing, and potential future pollution control measures.
 4. Understand and critically evaluate the functioning of different types of energy markets, future challenges to these markets, and their relevance to engineering problems.
 5. Describe and discuss important ethical issues in energy markets and environmental valuation, and their implications for good practice and policy.
+
+Refer to this for help - https://jupyterbook.org/en/stable/start/publish.html.
