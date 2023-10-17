@@ -1,11 +1,10 @@
-# Welcome to your Jupyter Book
+# Welcome to Energy & Environmental Economics
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+Welcome to Energy & Environmental Economics! Through this course, you will get a basic understanding of key microeconomic theories, the way energy markets function, and the economic aspects of environmental problems. 
 
-Check out the content pages bundled with this sample book to see more.
+This course consists of three blocks. The first will give you an introduction to (mainly micro-) economic theory. The second will use these theories and apply them to environmental problems. The third applies economic theory to energy markets.
+
+This website accompanies the material available on Learn. Learn is where any changes or other announcements will be published, so check the Learn page regularly and/or set up email notifications of changes.
 
 ```{tableofcontents}
 ```
