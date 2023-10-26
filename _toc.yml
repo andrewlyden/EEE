@@ -4,15 +4,29 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Intro to Economic Theory
+  - caption: Introduction to Microeconomics
     chapters:
-    - file: intro_and_definitions
     - file: consumer_theory
     - file: producer_theory
     - file: equilibrium
-  - caption: Extra
+  - caption: Environmental Economics
     chapters:
-    - file: markdown
-    - file: notebooks
-    - file: markdown-notebooks
-    - file: mymarkdownfilegit 
+    - file: externalities
+    - file: public_goods
+# - file: common_resources
+# - file: climate_change
+# - caption: Energy Economics
+#   chapters:
+#   - file: energy
+#   - file: electricity
+#   - file: oil
+#   - file: natural_gas
+#   - file: coal
+#   - file: nuclear
+#   - file: renewables
+# - caption: Extra
+#   chapters:
+#   - file: markdown
+#   - file: notebooks
+#   - file: markdown-notebooks
+#   - file: mymarkdownfilegit 
