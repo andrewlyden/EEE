@@ -6,13 +6,13 @@ root: intro
 parts:
   - caption: Introduction to Microeconomics
     chapters:
-    - file: consumer_theory
-    - file: producer_theory
-    - file: equilibrium
-  - caption: Environmental Economics
-    chapters:
-    - file: externalities
-    - file: public_goods
+    - file: Block1/consumer_theory
+    - file: Block1/producer_theory
+    # - file: equilibrium
+  # - caption: Environmental Economics
+  #   chapters:
+  #   - file: externalities
+  #   - file: public_goods
 # - file: common_resources
 # - file: climate_change
 # - caption: Energy Economics
