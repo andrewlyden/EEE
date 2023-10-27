@@ -431,9 +431,7 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>hvplot<span class="w"> </span>panel<span class="w"> </span>pandas<span class="w"> </span>numpy
-
-<span class="kn">import</span> <span class="nn">warnings</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">hvplot.pandas</span>
@@ -469,138 +467,6 @@ document.write(`
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: hvplot in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (0.9.0)
-Requirement already satisfied: panel in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (1.3.0)
-Requirement already satisfied: pandas in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (2.0.3)
-Requirement already satisfied: numpy in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (1.26.0)
-Requirement already satisfied: dask in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (2023.10.0)
-Requirement already satisfied: jupyterlab in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (4.0.7)
-Requirement already satisfied: ipympl in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (0.9.3)
-Requirement already satisfied: bokeh&gt;=1.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (3.3.0)
-Requirement already satisfied: colorcet&gt;=2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (3.0.1)
-Requirement already satisfied: holoviews&gt;=1.11.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (1.18.0)
-Requirement already satisfied: packaging in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (23.2)
-Requirement already satisfied: param&lt;3.0,&gt;=1.9.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (2.0.0)
-Requirement already satisfied: pyviz-comms&gt;=0.7.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (3.0.0)
-Requirement already satisfied: xyzservices&gt;=2021.09.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2023.10.1)
-Requirement already satisfied: markdown in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (3.5)
-Requirement already satisfied: markdown-it-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.2.0)
-Requirement already satisfied: linkify-it-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.0.0)
-Requirement already satisfied: mdit-py-plugins in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (0.4.0)
-Requirement already satisfied: requests in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.31.0)
-Requirement already satisfied: tqdm&gt;=4.48.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (4.66.1)
-Requirement already satisfied: bleach in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (6.1.0)
-Requirement already satisfied: typing-extensions in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (4.8.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2.8.2)
-Requirement already satisfied: pytz&gt;=2020.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2023.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2023.3)
-Requirement already satisfied: click&gt;=8.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (8.1.7)
-Requirement already satisfied: cloudpickle&gt;=1.5.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (3.0.0)
-Requirement already satisfied: fsspec&gt;=2021.09.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (2023.10.0)
-Requirement already satisfied: partd&gt;=1.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (1.4.1)
-Requirement already satisfied: pyyaml&gt;=5.3.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (6.0.1)
-Requirement already satisfied: toolz&gt;=0.10.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (0.12.0)
-Requirement already satisfied: importlib-metadata&gt;=4.13.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (6.8.0)
-Requirement already satisfied: async-lru&gt;=1.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.0.4)
-Requirement already satisfied: ipykernel in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (6.25.2)
-Requirement already satisfied: jinja2&gt;=3.0.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (3.1.2)
-Requirement already satisfied: jupyter-core in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (5.4.0)
-Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.2.0)
-Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.9.1)
-Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.19.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.25.0)
-Requirement already satisfied: notebook-shim&gt;=0.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (0.2.3)
-Requirement already satisfied: tornado&gt;=6.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (6.3.3)
-Requirement already satisfied: traitlets in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (5.11.2)
-Requirement already satisfied: ipython&lt;9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (8.16.1)
-Requirement already satisfied: ipython-genutils in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (0.2.0)
-Requirement already satisfied: pillow in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (10.1.0)
-Requirement already satisfied: ipywidgets&lt;9,&gt;=7.6.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (8.1.1)
-Requirement already satisfied: matplotlib&lt;4,&gt;=3.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (3.8.0)
-Requirement already satisfied: contourpy&gt;=1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from bokeh&gt;=1.0.0-&gt;hvplot) (1.1.1)
-Requirement already satisfied: colorama in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from click&gt;=8.0-&gt;dask) (0.4.6)
-Requirement already satisfied: pyct&gt;=0.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from colorcet&gt;=2-&gt;hvplot) (0.4.6)
-Requirement already satisfied: zipp&gt;=0.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from importlib-metadata&gt;=4.13.0-&gt;dask) (3.17.0)
-Requirement already satisfied: backcall in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.2.0)
-Requirement already satisfied: decorator in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (5.1.1)
-Requirement already satisfied: jedi&gt;=0.16 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.19.1)
-Requirement already satisfied: matplotlib-inline in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.1.6)
-Requirement already satisfied: pickleshare in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.7.5)
-Requirement already satisfied: prompt-toolkit!=3.0.37,&lt;3.1.0,&gt;=3.0.30 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (3.0.39)
-Requirement already satisfied: pygments&gt;=2.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (2.16.1)
-Requirement already satisfied: stack-data in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.6.2)
-Requirement already satisfied: comm&gt;=0.1.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (0.1.4)
-Requirement already satisfied: widgetsnbextension~=4.0.9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (4.0.9)
-Requirement already satisfied: jupyterlab-widgets~=3.0.9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (3.0.9)
-Requirement already satisfied: MarkupSafe&gt;=2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jinja2&gt;=3.0.3-&gt;jupyterlab) (2.1.3)
-Requirement already satisfied: anyio&gt;=3.1.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (4.0.0)
-Requirement already satisfied: argon2-cffi in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (23.1.0)
-Requirement already satisfied: jupyter-client&gt;=7.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (8.4.0)
-Requirement already satisfied: jupyter-events&gt;=0.6.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.8.0)
-Requirement already satisfied: jupyter-server-terminals in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.4.4)
-Requirement already satisfied: nbconvert&gt;=6.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (7.9.2)
-Requirement already satisfied: nbformat&gt;=5.3.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (5.9.2)
-Requirement already satisfied: overrides in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (7.4.0)
-Requirement already satisfied: prometheus-client in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.17.1)
-Requirement already satisfied: pywinpty in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.0.12)
-Requirement already satisfied: pyzmq&gt;=24 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (25.1.1)
-Requirement already satisfied: send2trash&gt;=1.8.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.8.2)
-Requirement already satisfied: terminado&gt;=0.8.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.17.1)
-Requirement already satisfied: websocket-client in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.6.4)
-Requirement already satisfied: platformdirs&gt;=2.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-core-&gt;jupyterlab) (3.11.0)
-Requirement already satisfied: pywin32&gt;=300 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-core-&gt;jupyterlab) (306)
-Requirement already satisfied: babel&gt;=2.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (2.13.0)
-Requirement already satisfied: json5&gt;=0.9.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.9.14)
-Requirement already satisfied: jsonschema&gt;=4.18.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (4.19.1)
-Requirement already satisfied: cycler&gt;=0.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (4.43.1)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (1.4.5)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (3.1.1)
-Requirement already satisfied: locket in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from partd&gt;=1.2.0-&gt;dask) (1.0.0)
-Requirement already satisfied: six&gt;=1.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (3.3.0)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (2.0.6)
-Requirement already satisfied: certifi&gt;=2017.4.17 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (2023.7.22)
-Requirement already satisfied: webencodings in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from bleach-&gt;panel) (0.5.1)
-Requirement already satisfied: debugpy&gt;=1.6.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (1.8.0)
-Requirement already satisfied: nest-asyncio in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (1.5.8)
-Requirement already satisfied: psutil in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (5.9.5)
-Requirement already satisfied: uc-micro-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from linkify-it-py-&gt;panel) (1.0.1)
-Requirement already satisfied: mdurl~=0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from markdown-it-py-&gt;panel) (0.1.0)
-Requirement already satisfied: sniffio&gt;=1.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from anyio&gt;=3.1.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
-Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jedi&gt;=0.16-&gt;ipython&lt;9-&gt;ipympl) (0.8.3)
-Requirement already satisfied: attrs&gt;=22.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (23.1.0)
-Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (2023.7.1)
-Requirement already satisfied: referencing&gt;=0.28.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.30.2)
-Requirement already satisfied: rpds-py&gt;=0.7.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.10.6)
-Requirement already satisfied: python-json-logger&gt;=2.0.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.0.7)
-Requirement already satisfied: rfc3339-validator in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.1.4)
-Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.1.1)
-Requirement already satisfied: beautifulsoup4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (4.12.2)
-Requirement already satisfied: defusedxml in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.7.1)
-Requirement already satisfied: jupyterlab-pygments in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.2.2)
-Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (3.0.2)
-Requirement already satisfied: nbclient&gt;=0.5.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.7.4)
-Requirement already satisfied: pandocfilters&gt;=1.4.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.5.0)
-Requirement already satisfied: tinycss2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.2.1)
-Requirement already satisfied: fastjsonschema in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbformat&gt;=5.3.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.18.1)
-Requirement already satisfied: wcwidth in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from prompt-toolkit!=3.0.37,&lt;3.1.0,&gt;=3.0.30-&gt;ipython&lt;9-&gt;ipympl) (0.2.8)
-Requirement already satisfied: argon2-cffi-bindings in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (21.2.0)
-Requirement already satisfied: executing&gt;=1.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (1.2.0)
-Requirement already satisfied: asttokens&gt;=2.1.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (2.4.0)
-Requirement already satisfied: pure-eval in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (0.2.2)
-Requirement already satisfied: fqdn in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.5.1)
-Requirement already satisfied: isoduration in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (20.11.0)
-Requirement already satisfied: jsonpointer&gt;1.13 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.4)
-Requirement already satisfied: uri-template in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
-Requirement already satisfied: webcolors&gt;=1.11 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.13)
-Requirement already satisfied: cffi&gt;=1.0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from argon2-cffi-bindings-&gt;argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.16.0)
-Requirement already satisfied: soupsieve&gt;1.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.5)
-Requirement already satisfied: pycparser in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.21)
-Requirement already satisfied: arrow&gt;=0.15.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
-Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.8.19.14)
-</pre></div>
-</div>
 <script type="application/javascript">(function(root) {
   function now() {
     return new Date();
@@ -1130,11 +996,11 @@ if (window.Jupyter !== undefined) {
   background-color: transparent !important;
 }
 </style></div><div class="output text_html"><div id='p1002'>
-  <div id="ac8b7094-53c1-40ea-822a-c9c216a86ca2" data-root-id="p1002" style="display: contents;"></div>
+  <div id="e21a7a94-293a-4340-a953-9bc2ba1aae15" data-root-id="p1002" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"f6680770-1649-458c-a2dd-86494c4d755b":{"version":"3.3.0","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1002"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1003","attributes":{"plot_id":"p1002","comm_id":"785d9e031a144c56ab2dfaac75030c00","client_comm_id":"5532a65660584a47b1405003536c3ec9"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"toggle_value1","properties":[{"name":"active_icons","kind":"Any","default":{"type":"map"}},{"name":"options","kind":"Any","default":{"type":"map","entries":[["favorite","heart"]]}},{"name":"value","kind":"Any","default":[]},{"name":"_reactions","kind":"Any","default":[]},{"name":"_base_url","kind":"Any","default":"https://tabler-icons.io/static/tabler-icons/icons/"}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"value","kind":"Any","default":null},{"name":"fill","kind":"Any","default":"none"}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"f6680770-1649-458c-a2dd-86494c4d755b","roots":{"p1002":"ac8b7094-53c1-40ea-822a-c9c216a86ca2"},"root_ids":["p1002"]}];
+  var docs_json = {"bef4d308-534f-4db0-866c-277c0b72f089":{"version":"3.3.0","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1002"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1003","attributes":{"plot_id":"p1002","comm_id":"e397c02a846a4234ae41b10aec20f4c1","client_comm_id":"58793058a9e740818c2119836cbb29f3"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"toggle_value1","properties":[{"name":"active_icons","kind":"Any","default":{"type":"map"}},{"name":"options","kind":"Any","default":{"type":"map","entries":[["favorite","heart"]]}},{"name":"value","kind":"Any","default":[]},{"name":"_reactions","kind":"Any","default":[]},{"name":"_base_url","kind":"Any","default":"https://tabler-icons.io/static/tabler-icons/icons/"}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"value","kind":"Any","default":null},{"name":"fill","kind":"Any","default":"none"}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"bef4d308-534f-4db0-866c-277c0b72f089","roots":{"p1002":"e21a7a94-293a-4340-a953-9bc2ba1aae15"},"root_ids":["p1002"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1722,27 +1588,69 @@ if (window.Jupyter !== undefined) {
 .cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
   background-color: transparent !important;
 }
-</style></div></div>
-</details>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;budget_constraint.png&#39;</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+</style></div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">c</span>:\Users\alyden\OneDrive - University of Edinburgh\Python\EEE\Block1\consumer_theory.ipynb Cell 6 line 2
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block1/consumer_theory.ipynb#W5sZmlsZQ%3D%3D?line=25&#39;</span><span class="o">&gt;</span><span class="mi">26</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">max_</span><span class="o">.</span><span class="n">hvplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of food&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">))</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block1/consumer_theory.ipynb#W5sZmlsZQ%3D%3D?line=26&#39;</span><span class="o">&gt;</span><span class="mi">27</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">plot</span> <span class="o">=</span> <span class="n">max_</span><span class="o">.</span><span class="n">hvplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of food&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">))</span>
+<span class="o">---&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block1/consumer_theory.ipynb#W5sZmlsZQ%3D%3D?line=27&#39;</span><span class="o">&gt;</span><span class="mi">28</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">hvplot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="s1">&#39;test.html&#39;</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\util\__init__.py:807,</span> in <span class="ni">save</span><span class="nt">(obj, filename, fmt, backend, resources, toolbar, title, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">805</span>     <span class="k">if</span> <span class="n">formats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">supported</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">806</span>         <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formats</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="ne">--&gt; </span><span class="mi">807</span> <span class="k">return</span> <span class="n">renderer_obj</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">808</span>                          <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\plotting\renderer.py:580,</span> in <span class="ni">Renderer.save</span><span class="nt">(self_or_cls, obj, basename, fmt, key, info, options, resources, title, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Supplying plot, style or norm options &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span>                        <span class="s2">&quot;as keyword arguments to the Renderer.save &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span>                        <span class="s2">&quot;method is deprecated and will error in &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">577</span>                        <span class="s2">&quot;the next minor release.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">with</span> <span class="n">StoreOptions</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">580</span>     <span class="n">plot</span><span class="p">,</span> <span class="n">fmt</span> <span class="o">=</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">_validate</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">582</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">Viewable</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">583</span>     <span class="kn">from</span> <span class="nn">bokeh.resources</span> <span class="kn">import</span> <span class="n">CDN</span><span class="p">,</span> <span class="n">INLINE</span><span class="p">,</span> <span class="n">Resources</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\plotting\renderer.py:309,</span> in <span class="ni">Renderer._validate</span><span class="nt">(self, obj, fmt, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">306</span>     <span class="n">plot</span> <span class="o">=</span> <span class="n">HoloViewsPane</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">307</span>                          <span class="n">renderer</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">308</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">309</span>     <span class="n">plot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_plot</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">renderer</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">311</span> <span class="n">all_formats</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">fig_formats</span> <span class="o">+</span> <span class="n">holomap_formats</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_formats</span><span class="p">:</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\plotting\renderer.py:231,</span> in <span class="ni">Renderer.get_plot</span><span class="nt">(self_or_cls, obj, doc, renderer, comm, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span> <span class="k">with</span> <span class="n">disable_pipeline</span><span class="p">():</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>     <span class="n">obj</span> <span class="o">=</span> <span class="n">Compositor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">self_or_cls</span><span class="o">.</span><span class="n">backend</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">231</span> <span class="n">plot_opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">self_or_cls</span><span class="o">.</span><span class="n">plot_options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">self_or_cls</span><span class="o">.</span><span class="n">size</span><span class="p">),</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AdjointLayout</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">obj</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\plotting\mpl\renderer.py:119,</span> in <span class="ni">MPLRenderer.plot_options</span><span class="nt">(cls, obj, percent_size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span> <span class="n">factor</span> <span class="o">=</span> <span class="n">percent_size</span> <span class="o">/</span> <span class="mf">100.0</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">last</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">HoloMap</span><span class="p">)</span> <span class="k">else</span> <span class="n">obj</span>
+<span class="ne">--&gt; </span><span class="mi">119</span> <span class="n">options</span> <span class="o">=</span> <span class="n">Store</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">backend</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="n">fig_size</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fig_size&#39;</span><span class="p">,</span> <span class="n">MPLPlot</span><span class="o">.</span><span class="n">fig_size</span><span class="p">)</span><span class="o">*</span><span class="n">factor</span>
+<span class="g g-Whitespace">    </span><span class="mi">122</span> <span class="k">return</span> <span class="nb">dict</span><span class="p">({</span><span class="s1">&#39;fig_size&#39;</span><span class="p">:</span><span class="n">fig_size</span><span class="p">},</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span>             <span class="o">**</span><span class="n">MPLPlot</span><span class="o">.</span><span class="n">lookup_options</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;plot&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+
+<span class="nn">File c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\holoviews\core\options.py:1277,</span> in <span class="ni">Store.lookup_options</span><span class="nt">(cls, backend, obj, group, defaults)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1274</span> <span class="nd">@classmethod</span>
+<span class="g g-Whitespace">   </span><span class="mi">1275</span> <span class="k">def</span> <span class="nf">lookup_options</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">backend</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1276</span>     <span class="c1"># Current custom_options dict may not have entry for obj.id</span>
+<span class="ne">-&gt; </span><span class="mi">1277</span>     <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">]:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1278</span>         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_custom_options</span><span class="p">[</span><span class="n">backend</span><span class="p">][</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">]</span><span class="o">.</span><span class="n">closest</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1279</span>             <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">defaults</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">backend</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1280</span>     <span class="k">elif</span> <span class="ow">not</span> <span class="n">defaults</span><span class="p">:</span>
+
+<span class="ne">TypeError</span>: unhashable type: &#39;Interactive&#39;
 </pre></div>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/0a70ca3fcfc226f156536d025e54ab4ecbff2f33d8497cc4c0aff6884a37e084.png" src="../_images/0a70ca3fcfc226f156536d025e54ab4ecbff2f33d8497cc4c0aff6884a37e084.png" />
 </div>
-</div>
+<p><img alt="image" src="Block1/'budget_constraint.png'" /></p>
 <p>Consider these questions:</p>
 <ul class="simple">
 <li><p>How does the budget constraint shift if the consumer’s income increases/decreases (e.g., because of a change in income taxes)?</p></li>
