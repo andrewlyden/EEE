@@ -415,7 +415,7 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>If you have not yet set up Python on your computer, you can execute this tutorial in your browser via Google Colab. Click on the rocket in the top right corner and launch “Colab”. If that doesn’t work download the .ipynb file and import it in Google Colab.</p>
 <p>Then install the following packages by executing the following command in a Jupyter cell at the top of the notebook.</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install pypsa pandas matplotlib highspy
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>!pip install hvplot panel pandas numpy
 </pre></div>
 </div>
 </div>
@@ -424,9 +424,16 @@ document.write(`
 <p>A person who purchases goods or services for their own usage can be considered a consumer. Consider a simple example of a consumer who, in a particular period, spends their entire income on only two things: food and fuel. For simplicity, we assume that only this period matters, i.e., the consumer does not think about the future, and money has no value in itself.</p>
 <p>The consumer in this example can only spend money on food, fuel, or a combination of both. A particular combination of goods, in this case, a combination of some units of fuel and some units of food, is called a basket or bundle. They cannot spend more then their income (= their budget). We can visualise this by drawing a budget constraint, as in the diagram below. Our consumer can spend their entire income on fuel (in which case they can buy a maximum of <span class="math notranslate nohighlight">\(\frac{\text{Budget}}{\text{Price per unit of fuel}}\)</span> units of fuel), their entire income on food (in which case they can buy a maximum of <span class="math notranslate nohighlight">\(\frac{\text{Budget}}{\text{Price per unit of food}}\)</span> units of food), or a combination of the two. They can afford any basket on the budget constraint or below it.</p>
 <p>Experiment using the diagram below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<div class="cell tag_hide-input tag_hide-output docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>hvplot<span class="w"> </span>panel<span class="w"> </span>pandas<span class="w"> </span>numpy
+
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">hvplot.pandas</span>
@@ -450,28 +457,150 @@ document.write(`
 <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="n">budget</span><span class="p">,</span> <span class="n">price_fuel</span><span class="p">,</span> <span class="n">price_food</span><span class="p">):</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">budget</span> <span class="o">/</span> <span class="n">price_fuel</span><span class="p">],</span> <span class="s1">&#39;Quantity of food&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">budget</span> <span class="o">/</span> <span class="n">price_food</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
     <span class="k">return</span> <span class="n">df</span>
-<span class="c1"># def max_food(budget, price_food):</span>
-<span class="c1">#     return </span>
-
-<span class="c1"># max_fuel = pn.interact(max_fuel, budget=budget, price_fuel=price_fuel)</span>
-<span class="c1"># # print(max_fuel)</span>
-<span class="c1"># max_food = pn.interact(max_food, budget=budget, price_food=price_food)</span>
-<span class="c1"># max_food</span>
-<span class="c1"># hvplot.bind(stock_df, ticker)</span>
-<span class="c1"># max_ = pn.interact(max, budget=budget, price_fuel=price_fuel, price_food=price_food).plot()</span>
 <span class="n">max_</span> <span class="o">=</span> <span class="n">hvplot</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="nb">max</span><span class="p">,</span> <span class="n">budget</span><span class="o">=</span><span class="n">budget</span><span class="p">,</span> <span class="n">price_fuel</span><span class="o">=</span><span class="n">price_fuel</span><span class="p">,</span> <span class="n">price_food</span><span class="o">=</span><span class="n">price_food</span><span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
-<span class="n">max_</span>
-<span class="c1"># max_.type()</span>
 <span class="n">max_</span><span class="o">.</span><span class="n">hvplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of food&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_budget</span><span class="p">))</span>
-<span class="c1"># max_.hvplot(kind=&#39;line&#39;, grid=True, )</span>
-<span class="c1"># print()</span>
-<span class="c1"># stock_dfi = hvplot.bind(stock_df, ticker).interactive(width=600)</span>
-
-<span class="c1"># stock_dfi.head(10)</span>
 </pre></div>
 </div>
 </div>
+</details>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: hvplot in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (0.9.0)
+Requirement already satisfied: panel in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (1.3.0)
+Requirement already satisfied: pandas in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (2.0.3)
+Requirement already satisfied: numpy in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (1.26.0)
+Requirement already satisfied: dask in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (2023.10.0)
+Requirement already satisfied: jupyterlab in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (4.0.7)
+Requirement already satisfied: ipympl in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (0.9.3)
+Requirement already satisfied: bokeh&gt;=1.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (3.3.0)
+Requirement already satisfied: colorcet&gt;=2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (3.0.1)
+Requirement already satisfied: holoviews&gt;=1.11.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (1.18.0)
+Requirement already satisfied: packaging in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (23.2)
+Requirement already satisfied: param&lt;3.0,&gt;=1.9.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from hvplot) (2.0.0)
+Requirement already satisfied: pyviz-comms&gt;=0.7.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (3.0.0)
+Requirement already satisfied: xyzservices&gt;=2021.09.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2023.10.1)
+Requirement already satisfied: markdown in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (3.5)
+Requirement already satisfied: markdown-it-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.2.0)
+Requirement already satisfied: linkify-it-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.0.0)
+Requirement already satisfied: mdit-py-plugins in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (0.4.0)
+Requirement already satisfied: requests in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (2.31.0)
+Requirement already satisfied: tqdm&gt;=4.48.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (4.66.1)
+Requirement already satisfied: bleach in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (6.1.0)
+Requirement already satisfied: typing-extensions in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from panel) (4.8.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2023.3.post1)
+Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from pandas) (2023.3)
+Requirement already satisfied: click&gt;=8.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (8.1.7)
+Requirement already satisfied: cloudpickle&gt;=1.5.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (3.0.0)
+Requirement already satisfied: fsspec&gt;=2021.09.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (2023.10.0)
+Requirement already satisfied: partd&gt;=1.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (1.4.1)
+Requirement already satisfied: pyyaml&gt;=5.3.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (6.0.1)
+Requirement already satisfied: toolz&gt;=0.10.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (0.12.0)
+Requirement already satisfied: importlib-metadata&gt;=4.13.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from dask) (6.8.0)
+Requirement already satisfied: async-lru&gt;=1.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.0.4)
+Requirement already satisfied: ipykernel in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (6.25.2)
+Requirement already satisfied: jinja2&gt;=3.0.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (3.1.2)
+Requirement already satisfied: jupyter-core in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (5.4.0)
+Requirement already satisfied: jupyter-lsp&gt;=2.0.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.2.0)
+Requirement already satisfied: jupyter-server&lt;3,&gt;=2.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.9.1)
+Requirement already satisfied: jupyterlab-server&lt;3,&gt;=2.19.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (2.25.0)
+Requirement already satisfied: notebook-shim&gt;=0.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (0.2.3)
+Requirement already satisfied: tornado&gt;=6.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (6.3.3)
+Requirement already satisfied: traitlets in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab) (5.11.2)
+Requirement already satisfied: ipython&lt;9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (8.16.1)
+Requirement already satisfied: ipython-genutils in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (0.2.0)
+Requirement already satisfied: pillow in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (10.1.0)
+Requirement already satisfied: ipywidgets&lt;9,&gt;=7.6.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (8.1.1)
+Requirement already satisfied: matplotlib&lt;4,&gt;=3.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipympl) (3.8.0)
+Requirement already satisfied: contourpy&gt;=1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from bokeh&gt;=1.0.0-&gt;hvplot) (1.1.1)
+Requirement already satisfied: colorama in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from click&gt;=8.0-&gt;dask) (0.4.6)
+Requirement already satisfied: pyct&gt;=0.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from colorcet&gt;=2-&gt;hvplot) (0.4.6)
+Requirement already satisfied: zipp&gt;=0.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from importlib-metadata&gt;=4.13.0-&gt;dask) (3.17.0)
+Requirement already satisfied: backcall in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.2.0)
+Requirement already satisfied: decorator in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (5.1.1)
+Requirement already satisfied: jedi&gt;=0.16 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.19.1)
+Requirement already satisfied: matplotlib-inline in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.1.6)
+Requirement already satisfied: pickleshare in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.7.5)
+Requirement already satisfied: prompt-toolkit!=3.0.37,&lt;3.1.0,&gt;=3.0.30 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (3.0.39)
+Requirement already satisfied: pygments&gt;=2.4.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (2.16.1)
+Requirement already satisfied: stack-data in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipython&lt;9-&gt;ipympl) (0.6.2)
+Requirement already satisfied: comm&gt;=0.1.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (0.1.4)
+Requirement already satisfied: widgetsnbextension~=4.0.9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (4.0.9)
+Requirement already satisfied: jupyterlab-widgets~=3.0.9 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipywidgets&lt;9,&gt;=7.6.0-&gt;ipympl) (3.0.9)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jinja2&gt;=3.0.3-&gt;jupyterlab) (2.1.3)
+Requirement already satisfied: anyio&gt;=3.1.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (4.0.0)
+Requirement already satisfied: argon2-cffi in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (23.1.0)
+Requirement already satisfied: jupyter-client&gt;=7.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (8.4.0)
+Requirement already satisfied: jupyter-events&gt;=0.6.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.8.0)
+Requirement already satisfied: jupyter-server-terminals in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.4.4)
+Requirement already satisfied: nbconvert&gt;=6.4.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (7.9.2)
+Requirement already satisfied: nbformat&gt;=5.3.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (5.9.2)
+Requirement already satisfied: overrides in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (7.4.0)
+Requirement already satisfied: prometheus-client in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.17.1)
+Requirement already satisfied: pywinpty in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.0.12)
+Requirement already satisfied: pyzmq&gt;=24 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (25.1.1)
+Requirement already satisfied: send2trash&gt;=1.8.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.8.2)
+Requirement already satisfied: terminado&gt;=0.8.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.17.1)
+Requirement already satisfied: websocket-client in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.6.4)
+Requirement already satisfied: platformdirs&gt;=2.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-core-&gt;jupyterlab) (3.11.0)
+Requirement already satisfied: pywin32&gt;=300 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-core-&gt;jupyterlab) (306)
+Requirement already satisfied: babel&gt;=2.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (2.13.0)
+Requirement already satisfied: json5&gt;=0.9.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.9.14)
+Requirement already satisfied: jsonschema&gt;=4.18.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (4.19.1)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (4.43.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (1.4.5)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from matplotlib&lt;4,&gt;=3.4.0-&gt;ipympl) (3.1.1)
+Requirement already satisfied: locket in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from partd&gt;=1.2.0-&gt;dask) (1.0.0)
+Requirement already satisfied: six&gt;=1.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (3.3.0)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (2.0.6)
+Requirement already satisfied: certifi&gt;=2017.4.17 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from requests-&gt;panel) (2023.7.22)
+Requirement already satisfied: webencodings in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from bleach-&gt;panel) (0.5.1)
+Requirement already satisfied: debugpy&gt;=1.6.5 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (1.8.0)
+Requirement already satisfied: nest-asyncio in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (1.5.8)
+Requirement already satisfied: psutil in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from ipykernel-&gt;jupyterlab) (5.9.5)
+Requirement already satisfied: uc-micro-py in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from linkify-it-py-&gt;panel) (1.0.1)
+Requirement already satisfied: mdurl~=0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from markdown-it-py-&gt;panel) (0.1.0)
+Requirement already satisfied: sniffio&gt;=1.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from anyio&gt;=3.1.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
+Requirement already satisfied: parso&lt;0.9.0,&gt;=0.8.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jedi&gt;=0.16-&gt;ipython&lt;9-&gt;ipympl) (0.8.3)
+Requirement already satisfied: attrs&gt;=22.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (23.1.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (2023.7.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.30.2)
+Requirement already satisfied: rpds-py&gt;=0.7.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema&gt;=4.18.0-&gt;jupyterlab-server&lt;3,&gt;=2.19.0-&gt;jupyterlab) (0.10.6)
+Requirement already satisfied: python-json-logger&gt;=2.0.4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.0.7)
+Requirement already satisfied: rfc3339-validator in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.1.4)
+Requirement already satisfied: rfc3986-validator&gt;=0.1.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.1.1)
+Requirement already satisfied: beautifulsoup4 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (4.12.2)
+Requirement already satisfied: defusedxml in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.7.1)
+Requirement already satisfied: jupyterlab-pygments in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.2.2)
+Requirement already satisfied: mistune&lt;4,&gt;=2.0.3 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (3.0.2)
+Requirement already satisfied: nbclient&gt;=0.5.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (0.7.4)
+Requirement already satisfied: pandocfilters&gt;=1.4.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.5.0)
+Requirement already satisfied: tinycss2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.2.1)
+Requirement already satisfied: fastjsonschema in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from nbformat&gt;=5.3.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.18.1)
+Requirement already satisfied: wcwidth in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from prompt-toolkit!=3.0.37,&lt;3.1.0,&gt;=3.0.30-&gt;ipython&lt;9-&gt;ipympl) (0.2.8)
+Requirement already satisfied: argon2-cffi-bindings in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (21.2.0)
+Requirement already satisfied: executing&gt;=1.2.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (1.2.0)
+Requirement already satisfied: asttokens&gt;=2.1.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (2.4.0)
+Requirement already satisfied: pure-eval in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from stack-data-&gt;ipython&lt;9-&gt;ipympl) (0.2.2)
+Requirement already satisfied: fqdn in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.5.1)
+Requirement already satisfied: isoduration in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (20.11.0)
+Requirement already satisfied: jsonpointer&gt;1.13 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.4)
+Requirement already satisfied: uri-template in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
+Requirement already satisfied: webcolors&gt;=1.11 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.13)
+Requirement already satisfied: cffi&gt;=1.0.1 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from argon2-cffi-bindings-&gt;argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.16.0)
+Requirement already satisfied: soupsieve&gt;1.2 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.4.4-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.5)
+Requirement already satisfied: pycparser in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from cffi&gt;=1.0.1-&gt;argon2-cffi-bindings-&gt;argon2-cffi-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.21)
+Requirement already satisfied: arrow&gt;=0.15.0 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (1.3.0)
+Requirement already satisfied: types-python-dateutil&gt;=2.8.10 in c:\users\alyden\anaconda3\envs\eee\lib\site-packages (from arrow&gt;=0.15.0-&gt;isoduration-&gt;jsonschema[format-nongpl]&gt;=4.18.0-&gt;jupyter-events&gt;=0.6.0-&gt;jupyter-server&lt;3,&gt;=2.4.0-&gt;jupyterlab) (2.8.19.14)
+</pre></div>
+</div>
 <script type="application/javascript">(function(root) {
   function now() {
     return new Date();
@@ -1000,12 +1129,12 @@ if (window.Jupyter !== undefined) {
 .cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
   background-color: transparent !important;
 }
-</style></div><div class="output text_html"><div id='p1068'>
-  <div id="d182a62b-82a8-4b75-ab6e-b7d6a2afd536" data-root-id="p1068" style="display: contents;"></div>
+</style></div><div class="output text_html"><div id='p1002'>
+  <div id="ac8b7094-53c1-40ea-822a-c9c216a86ca2" data-root-id="p1002" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"8690db25-03f2-4cce-bd19-25681f3f293e":{"version":"3.3.0","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1068"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1069","attributes":{"plot_id":"p1068","comm_id":"91f37cde0b2c4d49aa8bed0ade2ed1df","client_comm_id":"c0003abc47d9462fb3fbc47d350a5b0e"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"toggle_value1","properties":[{"name":"active_icons","kind":"Any","default":{"type":"map"}},{"name":"options","kind":"Any","default":{"type":"map","entries":[["favorite","heart"]]}},{"name":"value","kind":"Any","default":[]},{"name":"_reactions","kind":"Any","default":[]},{"name":"_base_url","kind":"Any","default":"https://tabler-icons.io/static/tabler-icons/icons/"}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"value","kind":"Any","default":null},{"name":"fill","kind":"Any","default":"none"}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"8690db25-03f2-4cce-bd19-25681f3f293e","roots":{"p1068":"d182a62b-82a8-4b75-ab6e-b7d6a2afd536"},"root_ids":["p1068"]}];
+  var docs_json = {"f6680770-1649-458c-a2dd-86494c4d755b":{"version":"3.3.0","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1002"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1003","attributes":{"plot_id":"p1002","comm_id":"785d9e031a144c56ab2dfaac75030c00","client_comm_id":"5532a65660584a47b1405003536c3ec9"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"mode","kind":"Any","default":"warn"},{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"toggle_value1","properties":[{"name":"active_icons","kind":"Any","default":{"type":"map"}},{"name":"options","kind":"Any","default":{"type":"map","entries":[["favorite","heart"]]}},{"name":"value","kind":"Any","default":[]},{"name":"_reactions","kind":"Any","default":[]},{"name":"_base_url","kind":"Any","default":"https://tabler-icons.io/static/tabler-icons/icons/"}]},{"type":"model","name":"copy_to_clipboard1","properties":[{"name":"value","kind":"Any","default":null},{"name":"fill","kind":"Any","default":"none"}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationAreaBase1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"f6680770-1649-458c-a2dd-86494c4d755b","roots":{"p1002":"ac8b7094-53c1-40ea-822a-c9c216a86ca2"},"root_ids":["p1002"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -1065,7 +1194,554 @@ if (window.Jupyter !== undefined) {
       }
     }, 25, root)
   }
-})(window);</script></div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "6ba05ed7773e4cff94fdb56aff7b397c", "version_major": 2, "version_minor": 0}</script></div>
+})(window);</script></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  var force = true;
+  var py_version = '3.3.0'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  var is_dev = py_version.indexOf("+") !== -1 || py_version.indexOf("-") !== -1;
+  var reloading = true;
+  var Bokeh = root.Bokeh;
+  var bokeh_loaded = Bokeh != null && (Bokeh.version === py_version || (Bokeh.versions !== undefined && Bokeh.versions.has(py_version)));
+
+  if (typeof (root._bokeh_timeout) === "undefined" || force) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      run_callbacks();
+      return null;
+    }
+    if (!reloading) {
+      console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error() {
+      console.error("failed to load " + url);
+    }
+
+    var skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {'jspanel': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/jspanel', 'jspanel-modal': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/modal/jspanel.modal', 'jspanel-tooltip': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/tooltip/jspanel.tooltip', 'jspanel-hint': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/hint/jspanel.hint', 'jspanel-layout': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/layout/jspanel.layout', 'jspanel-contextmenu': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/contextmenu/jspanel.contextmenu', 'jspanel-dock': 'https://cdn.jsdelivr.net/npm/jspanel4@4.12.0/dist/extensions/dock/jspanel.dock', 'gridstack': 'https://cdn.jsdelivr.net/npm/gridstack@7.2.3/dist/gridstack-all', 'notyf': 'https://cdn.jsdelivr.net/npm/notyf@3/notyf.min'}, 'shim': {'jspanel': {'exports': 'jsPanel'}, 'gridstack': {'exports': 'GridStack'}}});
+      require(["jspanel"], function(jsPanel) {
+	window.jsPanel = jsPanel
+	on_load()
+      })
+      require(["jspanel-modal"], function() {
+	on_load()
+      })
+      require(["jspanel-tooltip"], function() {
+	on_load()
+      })
+      require(["jspanel-hint"], function() {
+	on_load()
+      })
+      require(["jspanel-layout"], function() {
+	on_load()
+      })
+      require(["jspanel-contextmenu"], function() {
+	on_load()
+      })
+      require(["jspanel-dock"], function() {
+	on_load()
+      })
+      require(["gridstack"], function(GridStack) {
+	window.GridStack = GridStack
+	on_load()
+      })
+      require(["notyf"], function() {
+	on_load()
+      })
+      root._bokeh_is_loading = css_urls.length + 9;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    var existing_stylesheets = []
+    var links = document.getElementsByTagName('link')
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i]
+      if (link.href != null) {
+	existing_stylesheets.push(link.href)
+      }
+    }
+    for (var i = 0; i < css_urls.length; i++) {
+      var url = css_urls[i];
+      if (existing_stylesheets.indexOf(url) !== -1) {
+	on_load()
+	continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    if (((window['jsPanel'] !== undefined) && (!(window['jsPanel'] instanceof HTMLElement))) || window.requirejs) {
+      var urls = ['https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/jspanel.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/modal/jspanel.modal.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/tooltip/jspanel.tooltip.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/hint/jspanel.hint.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/layout/jspanel.layout.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/contextmenu/jspanel.contextmenu.js', 'https://cdn.holoviz.org/panel/1.3.0/dist/bundled/floatpanel/jspanel4@4.12.0/dist/extensions/dock/jspanel.dock.js'];
+      for (var i = 0; i < urls.length; i++) {
+        skip.push(urls[i])
+      }
+    }    if (((window['GridStack'] !== undefined) && (!(window['GridStack'] instanceof HTMLElement))) || window.requirejs) {
+      var urls = ['https://cdn.holoviz.org/panel/1.3.0/dist/bundled/gridstack/gridstack@7.2.3/dist/gridstack-all.js'];
+      for (var i = 0; i < urls.length; i++) {
+        skip.push(urls[i])
+      }
+    }    if (((window['Notyf'] !== undefined) && (!(window['Notyf'] instanceof HTMLElement))) || window.requirejs) {
+      var urls = ['https://cdn.holoviz.org/panel/1.3.0/dist/bundled/notificationarea/notyf@3/notyf.min.js'];
+      for (var i = 0; i < urls.length; i++) {
+        skip.push(urls[i])
+      }
+    }    var existing_scripts = []
+    var scripts = document.getElementsByTagName('script')
+    for (var i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+	existing_scripts.push(script.src)
+      }
+    }
+    for (var i = 0; i < js_urls.length; i++) {
+      var url = js_urls[i];
+      if (skip.indexOf(url) !== -1 || existing_scripts.indexOf(url) !== -1) {
+	if (!window.requirejs) {
+	  on_load();
+	}
+	continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (var i = 0; i < js_modules.length; i++) {
+      var url = js_modules[i];
+      if (skip.indexOf(url) !== -1 || existing_scripts.indexOf(url) !== -1) {
+	if (!window.requirejs) {
+	  on_load();
+	}
+	continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      var url = js_exports[name];
+      if (skip.indexOf(url) >= 0 || root[name] != null) {
+	if (!window.requirejs) {
+	  on_load();
+	}
+	continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  var js_urls = [];
+  var js_modules = [];
+  var js_exports = {};
+  var css_urls = [];
+  var inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (var i = 0; i < inline_js.length; i++) {
+        inline_js[i].call(root, root.Bokeh);
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+	var NewBokeh = root.Bokeh;
+	if (Bokeh.versions === undefined) {
+	  Bokeh.versions = new Map();
+	}
+	if (NewBokeh.version !== Bokeh.version) {
+	  Bokeh.versions.set(NewBokeh.version, NewBokeh)
+	}
+	root.Bokeh = Bokeh;
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      Bokeh = root.Bokeh;
+      bokeh_loaded = Bokeh != null && (Bokeh.version === py_version || (Bokeh.versions !== undefined && Bokeh.versions.has(py_version)));
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      if (!reloading && (!bokeh_loaded || is_dev)) {
+	root.Bokeh = undefined;
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+	console.debug("Bokeh: BokehJS plotting callback run at", now());
+	run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            console.log(message)
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        comm.open();
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        }) 
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+    > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+  ),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div></div>
+</details>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;budget_constraint.png&#39;</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/0a70ca3fcfc226f156536d025e54ab4ecbff2f33d8497cc4c0aff6884a37e084.png" src="../_images/0a70ca3fcfc226f156536d025e54ab4ecbff2f33d8497cc4c0aff6884a37e084.png" />
+</div>
 </div>
 <p>Consider these questions:</p>
 <ul class="simple">
