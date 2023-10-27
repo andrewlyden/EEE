@@ -3,3 +3,4 @@ matplotlib
 numpy
 jupyter_bokeh
 bokeh
+jupyter-server-proxy
