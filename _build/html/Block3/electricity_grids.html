@@ -657,9 +657,24 @@ g6: £60/MWh</p>
     <span class="k">def</span> <span class="nf">network_figure</span><span class="p">():</span>
 
         <span class="c1"># plot the network</span>
-        <span class="c1"># gen = network.generators.assign(g=network.generators_t.p.mean()).groupby([&quot;bus&quot;]).g.sum()</span>
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">mapbox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mapbox_style</span><span class="o">=</span><span class="s1">&#39;carto-positron&#39;</span><span class="p">,</span> <span class="n">mapbox_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span> <span class="n">iplot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">gen</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">g</span><span class="o">=</span><span class="n">network</span><span class="o">.</span><span class="n">generators_t</span><span class="o">.</span><span class="n">p</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;bus&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="c1"># fig = network.iplot(</span>
+        <span class="c1">#     size=(500, 500), mapbox=True, mapbox_style=&#39;carto-positron&#39;, mapbox_parameters={&#39;zoom&#39;: 5, &#39;hover_data&#39;: [network.generators.p_nom]}, iplot=False,</span>
+        <span class="c1">#     bus_sizes=gen / 1e2,</span>
+        <span class="c1">#     # bus_colors={&quot;gas&quot;: &quot;indianred&quot;, &quot;wind&quot;: &quot;midnightblue&quot;},</span>
+        <span class="c1">#     line_widths=4,)</span>
+        <span class="n">df1</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">buses</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">df2</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="c1"># print(df1)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># print(df_plot)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_mapbox</span><span class="p">(</span><span class="n">df_plot</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">hover_name</span><span class="o">=</span><span class="s1">&#39;Bus&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">gen</span> <span class="o">/</span> <span class="mf">1e2</span><span class="p">,</span> <span class="n">hover_data</span><span class="o">=</span><span class="s1">&#39;p_nom&#39;</span><span class="p">,</span>
+                    <span class="n">color_discrete_sequence</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span> <span class="n">zoom</span><span class="o">=</span><span class="mf">4.5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">mapbox_style</span><span class="o">=</span><span class="s2">&quot;carto-positron&quot;</span><span class="p">)</span>
+        <span class="c1"># fig.update_geos(fitbounds=&quot;locations&quot;)</span>
+
+        <span class="c1"># fig = go.Figure(fig)</span>
         <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
 
         <span class="k">return</span> <span class="n">fig</span>
@@ -683,7 +698,7 @@ g6: £60/MWh</p>
             
         ></iframe>
         </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
-INFO:linopy.io: Writing time: 0.02s
+INFO:linopy.io: Writing time: 0.03s
 INFO:linopy.solvers:Log file at C:\Users\alyden\AppData\Local\Temp\highs.log.
 INFO:linopy.constants: Optimization successful: 
 Status: ok
@@ -694,6 +709,86 @@ Solver model: available
 Solver message: optimal
 
 INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Kirchhoff-Voltage-Law were not assigned to the network.
+ERROR:__main__:Exception on /_dash-update-component [POST]
+Traceback (most recent call last):
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\flask\app.py&quot;, line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\flask\app.py&quot;, line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\flask\app.py&quot;, line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\flask\app.py&quot;, line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\dash\dash.py&quot;, line 1310, in dispatch
+    ctx.run(
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\dash\_callback.py&quot;, line 442, in add_context
+    output_value = func(*func_args, **func_kwargs)  # %% callback invoked %%
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\alyden\AppData\Local\Temp\ipykernel_19976\4082838598.py&quot;, line 229, in calc
+    fig = network_figure()
+          ^^^^^^^^^^^^^^^^
+  File &quot;C:\Users\alyden\AppData\Local\Temp\ipykernel_19976\4082838598.py&quot;, line 219, in network_figure
+    fig = px.scatter_mapbox(df_plot, lat=&quot;y&quot;, lon=&quot;x&quot;, hover_name=&#39;Bus&#39;, size=gen / 1e2, hover_data=&#39;p_nom&#39;,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\plotly\express\_chart_types.py&quot;, line 1247, in scatter_mapbox
+    return make_figure(args=locals(), constructor=go.Scattermapbox)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\plotly\express\_core.py&quot;, line 2076, in make_figure
+    args = build_dataframe(args, constructor)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\plotly\express\_core.py&quot;, line 1485, in build_dataframe
+    df_output, wide_id_vars = process_args_into_dataframe(
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\plotly\express\_core.py&quot;, line 1210, in process_args_into_dataframe
+    raise ValueError(err_msg)
+ValueError: Value of &#39;hover_name&#39; is not the name of a column in &#39;data_frame&#39;. Expected one of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46] but received: Bus
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>attribute      Generator       bus control type   p_nom  p_nom_extendable  \
+0          Scotland Wind  Scotland   Slack        500.0             False   
+1           Scotland Gas  Scotland      PQ       2000.0             False   
+2           England Wind   England      PQ        500.0             False   
+3            England Gas   England      PQ       4000.0             False   
+4             Wales Wind     Wales      PQ        500.0             False   
+5              Wales Gas     Wales      PQ       1000.0             False   
+
+attribute  p_nom_min  p_nom_max  p_min_pu  p_max_pu  ...  min_up_time  \
+0                0.0        inf       0.0       1.0  ...            0   
+1                0.0        inf       0.0       1.0  ...            0   
+2                0.0        inf       0.0       1.0  ...            0   
+3                0.0        inf       0.0       1.0  ...            0   
+4                0.0        inf       0.0       1.0  ...            0   
+5                0.0        inf       0.0       1.0  ...            0   
+
+attribute  min_down_time  up_time_before down_time_before  ramp_limit_up  \
+0                      0               1                0            NaN   
+1                      0               1                0            NaN   
+2                      0               1                0            NaN   
+3                      0               1                0            NaN   
+4                      0               1                0            NaN   
+5                      0               1                0            NaN   
+
+attribute  ramp_limit_down  ramp_limit_start_up  ramp_limit_shut_down  weight  \
+0                      NaN                  1.0                   1.0     1.0   
+1                      NaN                  1.0                   1.0     1.0   
+2                      NaN                  1.0                   1.0     1.0   
+3                      NaN                  1.0                   1.0     1.0   
+4                      NaN                  1.0                   1.0     1.0   
+5                      NaN                  1.0                   1.0     1.0   
+
+attribute  p_nom_opt  
+0              500.0  
+1             2000.0  
+2              500.0  
+3             4000.0  
+4              500.0  
+5             1000.0  
+
+[6 rows x 34 columns]
 </pre></div>
 </div>
 </div>
