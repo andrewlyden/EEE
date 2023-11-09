@@ -437,76 +437,8 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from jupyter_dash import JupyterDash</span>
-<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select machine price per unit:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-machine&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
-        <span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select fuel price:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-fuel&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
-        <span class="p">)</span>
-    <span class="p">],</span>
-<span class="n">style</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;overflow&#39;</span><span class="p">:</span> <span class="s1">&#39;hidden&#39;</span><span class="p">})</span>
-
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
-    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-machine&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-fuel&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-<span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">machine</span><span class="p">,</span> <span class="n">fuel</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">df_</span><span class="p">(</span><span class="n">budget</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">budget</span> <span class="o">/</span> <span class="n">machine</span><span class="p">],</span> <span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">budget</span> <span class="o">/</span> <span class="n">fuel</span><span class="p">,</span> <span class="mi">0</span><span class="p">]})</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-    <span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
-    <span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">160</span><span class="p">)</span>
-    <span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">140</span><span class="p">)</span>
-    <span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
-    <span class="n">fig5</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-    <span class="n">fig6</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
-    <span class="n">fig7</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
-    <span class="n">fig8</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-    <span class="n">fig9</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">df_</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-    <span class="n">fig10</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machines&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig2</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig3</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig4</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig5</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig6</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig7</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig8</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig9</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig10</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fig</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8054</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">620</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -514,9 +446,9 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="100%"
-            height="650"
-            src="http://127.0.0.1:8054/"
+            width="750"
+            height="620"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-1"
             frameborder="0"
             allowfullscreen
             
@@ -1980,99 +1912,8 @@ if (window.Jupyter !== undefined) {
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from jupyter_dash import JupyterDash</span>
-<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
-
-<span class="n">app2</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
-
-<span class="n">app2</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select cost level:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-cost&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">10</span><span class="p">)},</span>
-        <span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select machine price:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-machine&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-        <span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select fuel price:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-fuel&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
-        <span class="p">)</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-
-<span class="nd">@app2</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
-    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-cost&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-machine&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-fuel&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-<span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">fuel</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">isoquant</span><span class="p">(</span><span class="n">production</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="n">const</span> <span class="o">=</span> <span class="mf">0.5</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">const</span> <span class="o">*</span> <span class="p">(</span><span class="n">production</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="n">alpha</span><span class="p">))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">))</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity of machine&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-
-    <span class="n">df_plot</span> <span class="o">=</span> <span class="n">isoquant</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
-    <span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_plot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machine&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig1</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Create the indifference curves using Plotly Express</span>
-    <span class="c1"># fig1 = px.line(df, x=&#39;Quantity of fuel&#39;, y=&#39;Quantity of food&#39;, color=&#39;Budget&#39;, labels={&#39;Quantity of food&#39;: &#39;Quantity of food&#39;}, title=&#39;Indifference Curves&#39;)</span>
-
-    <span class="k">def</span> <span class="nf">isocost</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">fuel</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">slope</span> <span class="o">=</span> <span class="o">-</span><span class="n">machine</span> <span class="o">/</span> <span class="n">fuel</span>
-        <span class="n">intercept</span> <span class="o">=</span> <span class="n">cost</span> <span class="o">/</span> <span class="n">fuel</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity of machine&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-
-    <span class="n">df_plot</span> <span class="o">=</span> <span class="n">isocost</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">machine</span><span class="p">,</span> <span class="n">fuel</span><span class="p">)</span>
-    <span class="c1"># fig = df_plot.hvplot(kind=&#39;line&#39;, x=&#39;Quantity of fuel&#39;, y=&#39;Price of fuel&#39;, width=800, height=500, xlim=(0, 100), ylim=(0, 100))</span>
-    <span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_plot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity of machine&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Quantity of fuel&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-    <span class="n">fig2</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-
-    <span class="n">fig3</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig1</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig2</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">fig3</span>
-
-<span class="n">app2</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8055</span><span class="p">,</span> <span class="n">jupyter_height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-2&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2080,9 +1921,9 @@ if (window.Jupyter !== undefined) {
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="100%"
-            height="800"
-            src="http://127.0.0.1:8055/"
+            width="800"
+            height="750"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-2"
             frameborder="0"
             allowfullscreen
             
@@ -3510,87 +3351,8 @@ if (window.Jupyter !== undefined) {
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from jupyter_dash import JupyterDash</span>
-<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
-<span class="n">graph_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;overflow&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">graph_style</span><span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve intercept:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-intercept&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)},</span>
-        <span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve slope:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-slope&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
-        <span class="p">),</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select market price:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-price&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)},</span>
-        <span class="p">)</span>
-    <span class="p">]</span>
-<span class="p">)</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
-    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-slope&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-price&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">supply_function</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-
-    <span class="n">df_plot</span> <span class="o">=</span> <span class="n">supply_function</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">)</span>
-    <span class="c1"># fig = df_plot.hvplot(kind=&#39;line&#39;, x=&#39;Quantity of fuel&#39;, y=&#39;Price of fuel&#39;, width=800, height=500, xlim=(0, 100), ylim=(0, 100))</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_plot</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Supply curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="n">intercept</span><span class="p">)</span> <span class="o">/</span> <span class="n">slope</span>
-    <span class="n">producer_surplus</span> <span class="o">=</span> <span class="p">(</span><span class="n">price</span> <span class="o">-</span> <span class="n">intercept</span><span class="p">)</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">/</span> <span class="mi">2</span>
-
-    <span class="n">fig_shape</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">quantity</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">intercept</span><span class="p">,</span><span class="n">price</span><span class="p">,</span><span class="n">price</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;LightBlue&quot;</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;toself&quot;</span><span class="p">))</span>
-    <span class="n">producer_surplus_text</span> <span class="o">=</span> <span class="s2">&quot;Producer surplus = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">producer_surplus</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">fig_shape</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">producer_surplus_text</span><span class="p">)</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig_shape</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="n">quantity</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">))</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">quantity</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x1</span><span class="o">=</span><span class="n">quantity</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">))</span>
-
-    <span class="k">return</span> <span class="n">fig</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8056</span><span class="p">,</span> <span class="n">jupyter_height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-3&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3598,9 +3360,9 @@ if (window.Jupyter !== undefined) {
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="100%"
+            width="800"
             height="700"
-            src="http://127.0.0.1:8056/"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/producer-theory-3"
             frameborder="0"
             allowfullscreen
             
