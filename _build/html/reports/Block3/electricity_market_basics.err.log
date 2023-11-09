@@ -1,0 +1,301 @@
+Traceback (most recent call last):
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\nbclient\client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\jupyter_core\utils\__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\asyncio\base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\nbclient\client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Users\alyden\Anaconda3\envs\EEE\Lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pypsa, numpy as np
+
+# from jupyter_dash import JupyterDash
+from dash import Dash, dcc, html, Input, Output
+import plotly.graph_objects as go
+import plotly.express as px
+import numpy as np
+import pandas as pd
+import dash_bootstrap_components as dbc
+
+app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+
+app.layout = html.Div(
+    [
+        # html.H4("Budget constraint"),
+        dcc.Graph(id="graph"),
+        html.P("Select wind capacity:"),
+        dcc.Slider(
+            id="slider-wind-capacity",
+            min=0,
+            max=2000,
+            step=1,
+            value=500,
+            marks={i: str(i) for i in range(0, 2001, 250)},
+        ),
+        html.P("Select wind availability:"),
+        dcc.Slider(
+            id="slider-wind-availability",
+            min=0,
+            max=1,
+            step=0.01,
+            value=0.75,
+            marks={i: str(i) for i in range(0, 2, 1)},
+        ),
+        html.P("Select gas capacity:"),
+        dcc.Slider(
+            id="slider-gas-capacity",
+            min=500,
+            max=2000,
+            step=1,
+            value=500,
+            marks={i: str(i) for i in range(0, 2001, 250)},
+        ),
+        html.P("Select coal capacity:"),
+        dcc.Slider(
+            id="slider-coal-capacity",
+            min=500,
+            max=2000,
+            step=1,
+            value=500,
+            marks={i: str(i) for i in range(0, 2001, 250)},
+        ),
+        html.P("Select electricity demand:"),
+        dcc.Slider(
+            id="slider-electricity-demand",
+            min=1000,
+            max=4000,
+            step=100,
+            value=1000,
+            marks={i: str(i) for i in range(0, 4001, 500)},
+        )
+    ]
+)
+
+@app.callback(
+    Output("graph", "figure"),
+    Input("slider-wind-capacity", "value"),
+    Input("slider-wind-availability", "value"),
+    Input("slider-gas-capacity", "value"),
+    Input("slider-coal-capacity", "value"),
+    Input("slider-electricity-demand", "value"),
+)
+
+def calc(wind_capacity, wind_availability, gas_capacity, coal_capacity, electricity_demand):
+
+    # carbon emissions in tCO2/MWh
+    carbon_emissions = {"Wind": 0, "Coal": 0.1, "Gas": 0.05}
+    # operational costs in £/MWh
+    operational_costs = {"Wind": 0, "Coal": 8, "Gas": 10}
+    # marginal costs in £/MWh
+    carbon_price = 1
+    marginal_costs = {"Wind": carbon_emissions['Wind'] * carbon_price + operational_costs['Wind'],
+                    "Coal": carbon_emissions['Coal'] * carbon_price + operational_costs['Coal'],
+                    "Gas": carbon_emissions['Gas'] * carbon_price + operational_costs['Gas']}
+    # power plant capacities (nominal powers in MW)
+    power_plant_p_nom = {'Bus': {"Coal": coal_capacity, "Wind": wind_capacity, "Gas": gas_capacity}}
+    # country electrical loads in MW (not necessarily realistic)
+    loads = {"Bus": [electricity_demand]}
+
+    network = pypsa.Network()
+    # snapshots labelled by [0,1,2,3]
+    country = "Bus"
+    network.set_snapshots(range(1))
+    network.add("Bus", country)
+
+    # p_max_pu is variable for wind
+    for tech in power_plant_p_nom[country]:
+        network.add(
+            "Generator",
+            "{} {}".format(country, tech),
+            bus=country,
+            p_nom=power_plant_p_nom[country][tech],
+            marginal_cost=marginal_costs[tech],
+            p_max_pu=([wind_availability] if tech == "Wind" else 1),
+        )
+
+    # load which varies over the snapshots
+    network.add(
+        "Load",
+        "{} load".format(country),
+        bus=country,
+        p_set=np.array([electricity_demand]),
+    )
+
+    network.optimize(solver_name='highs')
+
+    def demand_supply_diagram(period):
+
+        # minimum marginal cost unit between gas and coal
+        marginal_costs_ = marginal_costs
+        del marginal_costs_['Wind']
+        min_type = min(marginal_costs_, key=marginal_costs_.get)
+        max_type = max(marginal_costs_, key=marginal_costs_.get)
+
+        x0 = 0
+        y0 = 0
+        print(x0, y0)
+
+        x1 = wind_capacity * network.generators_t.p_max_pu['Bus Wind'][period]
+        y1 = 0
+        print(x1, y1)
+
+        x2 = x1
+        y2 = marginal_costs[min_type]
+        print(x2, y2)
+
+        x3 = x2 + power_plant_p_nom['Bus'][min_type]
+        y3 = y2
+        print(x3, y3)
+
+        x4 = x3
+        y4 = marginal_costs[max_type]
+        print(x4, y4)
+
+        x5 = x4 + power_plant_p_nom['Bus'][max_type]
+        y5 = y4
+        print(x5, y5)
+
+        fig = go.Figure()
+
+        # Add shapes
+        fig.add_shape(type="line",
+            x0=x0, y0=y0, x1=x1, y1=y1,
+            line=dict(color="RoyalBlue",width=3),
+            label=dict(text="Wind")
+        )
+        fig.add_shape(type="line",
+            x0=x1, y0=y1, x1=x2, y1=y2,
+            line=dict(color="RoyalBlue",width=3)
+        )
+        fig.add_shape(type="line",
+            x0=x2, y0=y2, x1=x3, y1=y3,
+            line=dict(color="RoyalBlue",width=3),
+            label=dict(text=min_type)
+        )
+        fig.add_shape(type="line",
+            x0=x3, y0=y3, x1=x4, y1=y4,
+            line=dict(color="RoyalBlue",width=3)
+        )
+        fig.add_shape(type="line",
+            x0=x4, y0=y4, x1=x5, y1=y5,
+            line=dict(color="RoyalBlue",width=3),
+            label=dict(text=max_type)
+        )
+        fig.update_shapes(dict(xref='x', yref='y'))
+
+        fig.add_vline(x=network.loads_t.p['Bus load'][period], line_color="green", annotation_text="Load", annotation_position="bottom right")
+
+        fig.update_xaxes(range=[0, network.generators.p_nom.sum() + 10], title_text='Quantity')
+        fig.update_yaxes(range=[0, y5 + 10], title_text='Price')
+
+        return fig
+
+    fig = demand_supply_diagram(0)
+
+    return fig
+
+app.run_server(mode='inline', port=8062, jupyter_height=900)
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mOSError[0m                                   Traceback (most recent call last)
+Cell [1;32mIn[1], line 188[0m
+[0;32m    184[0m     fig [38;5;241m=[39m demand_supply_diagram([38;5;241m0[39m)
+[0;32m    186[0m     [38;5;28;01mreturn[39;00m fig
+[1;32m--> 188[0m [43mapp[49m[38;5;241;43m.[39;49m[43mrun_server[49m[43m([49m[43mmode[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43minline[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mport[49m[38;5;241;43m=[39;49m[38;5;241;43m8062[39;49m[43m,[49m[43m [49m[43mjupyter_height[49m[38;5;241;43m=[39;49m[38;5;241;43m900[39;49m[43m)[49m
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\dash\dash.py:2175[0m, in [0;36mDash.run_server[1;34m(self, *args, **kwargs)[0m
+[0;32m   2169[0m [38;5;28;01mdef[39;00m [38;5;21mrun_server[39m([38;5;28mself[39m, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[0;32m   2170[0m [38;5;250m    [39m[38;5;124;03m"""`run_server` is a deprecated alias of `run` and may be removed in a[39;00m
+[0;32m   2171[0m [38;5;124;03m    future version. We recommend using `app.run` instead.[39;00m
+[0;32m   2172[0m 
+[0;32m   2173[0m [38;5;124;03m    See `app.run` for usage information.[39;00m
+[0;32m   2174[0m [38;5;124;03m    """[39;00m
+[1;32m-> 2175[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mrun[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\dash\dash.py:2066[0m, in [0;36mDash.run[1;34m(self, host, port, proxy, debug, jupyter_mode, jupyter_width, jupyter_height, jupyter_server_url, dev_tools_ui, dev_tools_props_check, dev_tools_serve_dev_bundles, dev_tools_hot_reload, dev_tools_hot_reload_interval, dev_tools_hot_reload_watch_interval, dev_tools_hot_reload_max_retry, dev_tools_silence_routes_logging, dev_tools_prune_errors, **flask_run_options)[0m
+[0;32m   2063[0m             extra_files[38;5;241m.[39mappend(path)
+[0;32m   2065[0m [38;5;28;01mif[39;00m jupyter_dash[38;5;241m.[39mactive:
+[1;32m-> 2066[0m     [43mjupyter_dash[49m[38;5;241;43m.[39;49m[43mrun_app[49m[43m([49m
+[0;32m   2067[0m [43m        [49m[38;5;28;43mself[39;49m[43m,[49m
+[0;32m   2068[0m [43m        [49m[43mmode[49m[38;5;241;43m=[39;49m[43mjupyter_mode[49m[43m,[49m
+[0;32m   2069[0m [43m        [49m[43mwidth[49m[38;5;241;43m=[39;49m[43mjupyter_width[49m[43m,[49m
+[0;32m   2070[0m [43m        [49m[43mheight[49m[38;5;241;43m=[39;49m[43mjupyter_height[49m[43m,[49m
+[0;32m   2071[0m [43m        [49m[43mhost[49m[38;5;241;43m=[39;49m[43mhost[49m[43m,[49m
+[0;32m   2072[0m [43m        [49m[43mport[49m[38;5;241;43m=[39;49m[43mport[49m[43m,[49m
+[0;32m   2073[0m [43m        [49m[43mserver_url[49m[38;5;241;43m=[39;49m[43mjupyter_server_url[49m[43m,[49m
+[0;32m   2074[0m [43m    [49m[43m)[49m
+[0;32m   2075[0m [38;5;28;01melse[39;00m:
+[0;32m   2076[0m     [38;5;28mself[39m[38;5;241m.[39mserver[38;5;241m.[39mrun(host[38;5;241m=[39mhost, port[38;5;241m=[39mport, debug[38;5;241m=[39mdebug, [38;5;241m*[39m[38;5;241m*[39mflask_run_options)
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\dash\_jupyter.py:401[0m, in [0;36mJupyterDash.run_app[1;34m(self, app, mode, width, height, host, port, server_url)[0m
+[0;32m    399[0m     display(HTML(msg))
+[0;32m    400[0m [38;5;28;01melse[39;00m:
+[1;32m--> 401[0m     [38;5;28;01mraise[39;00m final_error
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\dash\_jupyter.py:388[0m, in [0;36mJupyterDash.run_app[1;34m(self, app, mode, width, height, host, port, server_url)[0m
+[0;32m    385[0m         [38;5;28;01mraise[39;00m err
+[0;32m    387[0m [38;5;28;01mtry[39;00m:
+[1;32m--> 388[0m     [43mwait_for_app[49m[43m([49m[43m)[49m
+[0;32m    390[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39min_colab:
+[0;32m    391[0m         JupyterDash[38;5;241m.[39m_display_in_colab(dashboard_url, port, mode, width, height)
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\retrying.py:49[0m, in [0;36mretry.<locals>.wrap.<locals>.wrapped_f[1;34m(*args, **kw)[0m
+[0;32m     47[0m [38;5;129m@six[39m[38;5;241m.[39mwraps(f)
+[0;32m     48[0m [38;5;28;01mdef[39;00m [38;5;21mwrapped_f[39m([38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkw):
+[1;32m---> 49[0m     [38;5;28;01mreturn[39;00m [43mRetrying[49m[43m([49m[38;5;241;43m*[39;49m[43mdargs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mdkw[49m[43m)[49m[38;5;241;43m.[39;49m[43mcall[49m[43m([49m[43mf[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkw[49m[43m)[49m
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\retrying.py:212[0m, in [0;36mRetrying.call[1;34m(self, fn, *args, **kwargs)[0m
+[0;32m    209[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mstop(attempt_number, delay_since_first_attempt_ms):
+[0;32m    210[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_wrap_exception [38;5;129;01mand[39;00m attempt[38;5;241m.[39mhas_exception:
+[0;32m    211[0m         [38;5;66;03m# get() on an attempt with an exception should cause it to be raised, but raise just in case[39;00m
+[1;32m--> 212[0m         [38;5;28;01mraise[39;00m [43mattempt[49m[38;5;241;43m.[39;49m[43mget[49m[43m([49m[43m)[49m
+[0;32m    213[0m     [38;5;28;01melse[39;00m:
+[0;32m    214[0m         [38;5;28;01mraise[39;00m RetryError(attempt)
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\retrying.py:247[0m, in [0;36mAttempt.get[1;34m(self, wrap_exception)[0m
+[0;32m    245[0m         [38;5;28;01mraise[39;00m RetryError([38;5;28mself[39m)
+[0;32m    246[0m     [38;5;28;01melse[39;00m:
+[1;32m--> 247[0m         [43msix[49m[38;5;241;43m.[39;49m[43mreraise[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mvalue[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mvalue[49m[43m[[49m[38;5;241;43m1[39;49m[43m][49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mvalue[49m[43m[[49m[38;5;241;43m2[39;49m[43m][49m[43m)[49m
+[0;32m    248[0m [38;5;28;01melse[39;00m:
+[0;32m    249[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39mvalue
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\six.py:719[0m, in [0;36mreraise[1;34m(tp, value, tb)[0m
+[0;32m    717[0m     [38;5;28;01mif[39;00m value[38;5;241m.[39m__traceback__ [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m tb:
+[0;32m    718[0m         [38;5;28;01mraise[39;00m value[38;5;241m.[39mwith_traceback(tb)
+[1;32m--> 719[0m     [38;5;28;01mraise[39;00m value
+[0;32m    720[0m [38;5;28;01mfinally[39;00m:
+[0;32m    721[0m     value [38;5;241m=[39m [38;5;28;01mNone[39;00m
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\retrying.py:200[0m, in [0;36mRetrying.call[1;34m(self, fn, *args, **kwargs)[0m
+[0;32m    198[0m [38;5;28;01mwhile[39;00m [38;5;28;01mTrue[39;00m:
+[0;32m    199[0m     [38;5;28;01mtry[39;00m:
+[1;32m--> 200[0m         attempt [38;5;241m=[39m Attempt([43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m, attempt_number, [38;5;28;01mFalse[39;00m)
+[0;32m    201[0m     [38;5;28;01mexcept[39;00m:
+[0;32m    202[0m         tb [38;5;241m=[39m sys[38;5;241m.[39mexc_info()
+
+File [1;32m~\Anaconda3\envs\eee\Lib\site-packages\dash\_jupyter.py:379[0m, in [0;36mJupyterDash.run_app.<locals>.wait_for_app[1;34m()[0m
+[0;32m    377[0m     [38;5;28;01mif[39;00m res [38;5;241m!=[39m [38;5;124m"[39m[38;5;124mAlive[39m[38;5;124m"[39m:
+[0;32m    378[0m         url [38;5;241m=[39m [38;5;124mf[39m[38;5;124m"[39m[38;5;124mhttp://[39m[38;5;132;01m{[39;00mhost[38;5;132;01m}[39;00m[38;5;124m:[39m[38;5;132;01m{[39;00mport[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m--> 379[0m         [38;5;28;01mraise[39;00m [38;5;167;01mOSError[39;00m(
+[0;32m    380[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mAddress [39m[38;5;124m'[39m[38;5;132;01m{[39;00murl[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m already in use.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[0;32m    381[0m             [38;5;124m"[39m[38;5;124m    Try passing a different port to run_server.[39m[38;5;124m"[39m
+[0;32m    382[0m         )
+[0;32m    383[0m [38;5;28;01mexcept[39;00m requests[38;5;241m.[39mConnectionError [38;5;28;01mas[39;00m err:
+[0;32m    384[0m     _get_error()
+
+[1;31mOSError[0m: Address 'http://127.0.0.1:8062' already in use.
+    Try passing a different port to run_server.
+

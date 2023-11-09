@@ -1,0 +1,821 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Electricity grids &#8212; Energy and Environmental Economics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Block3/electricity_grids';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Investment in electricity markets" href="electricity_investment.html" />
+    <link rel="prev" title="Electricity market basics" href="electricity_market_basics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Microeconomics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Block1/consumer_theory.html">Consumer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/producer_theory.html">Producer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/equilibrium.html">Equilibirum</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Block2/externalities.html">Externalities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/climate_negotiations.html">Climate negotiations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/environmental_assessment.html">Environmental assessment</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="electricity_market_basics.html">Electricity market basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Electricity grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electricity_investment.html">Investment in electricity markets</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/andrewlyden/EEE/blob/main/Block3/electricity_grids.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/andrewlyden/EEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2FBlock3/electricity_grids.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Block3/electricity_grids.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Electricity grids</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-pricing">Uniform pricing</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="electricity-grids">
+<h1>Electricity grids<a class="headerlink" href="#electricity-grids" title="Permalink to this heading">#</a></h1>
+<p>We have looked at the basics of energy market operation, and we will now extend this to include physical electricity grids. Grids are generally divided into a transmission network (the large-scale high-voltage infrastructure to which large power stations, as well as some large consumers such as aluminium smelters are connected, and a number of distribution networks, which connect to the transmission network at grid supply points, and serve all other consumers through a network of lower-voltage lines, as well as smaller power producers.</p>
+<p>There are different models for how these systems are operated. In some places, including parts of the US, most African and some Asian countries (and most others in the past), electricity systems are operated by vertically integrated utilities. These are state-owned or private (but heavily regulated) companies that own some or all of the electricity generation capacity and the networks, and sell energy directly to consumers. This can have advantages - planning an integrated network is easier, and there might be economies of scale (doing things at a larger scale is generally cheaper) which could lead to lower prices for consumers. However, vertically integrated utilities have monopolies, and the general consensus is that companies are more efficiency (e.g., because they have more of an incentive to innovate) if there is competition. Of course, competition on the networks side is not generally possible - it would be inefficient to have parallel networks owned by competing companies. Competition in wholesale and consumer electricity markets is difficult to facilitate if there is a vertically integrated utility, as this utility could, for instance, give priority to its own generators when it comes to use of the network. Most countries have therefore gone through a process of unbundling, splitting up vertically integrated utilities into a separate company that looks after the network, and a number of companies that compete in the electricity market and then pay the network operator for use of the network. Some developing countries are halfway through this process, having unbundled but not yet allowing full competition in either consumer markets and/or wholesale markets - instead, they might, for instance, have a single buyer - a public body that is the only buyer in wholesale markets and which alone sells to consumers.</p>
+<p>In what follows, we will focus on liberalised markets that have gone through the unbundling process - as this is where most developed energy markets currently either are or are in the process of moving towards. In these markets, each distribution network has a distribution network operator (DNO) which is responsible for making sure its operation runs smoothly. Distribution networks are often (but not always) radial, with the grid supply point on one side, from which a number of lines at lower voltages split off; further down the line, each of these lines is then further split, etc. - until we reach the feeders that connect, e.g., individual households. These networks used to be easy to manage. All DNOs really had to do was build more lines if there was ever a danger of flows exceeding safe limits. Currently, their job is becoming a lot harder as more and more renewables are connected to distribution networks. This can cause local congestion and voltage problems, among others, which need to be actively managed. DNOs are therefore reinventing themselves as distribution system operators (DSOs) which take a much more active role in network management. Some are, for instance, experimenting with local markets through which industrial or residential consumers can offer to decrease or increase their electricity demand to, e.g., help the DSO manage congestion. This is an interesting new area of energy market design, which we do not have time to go into in detail in this course.</p>
+<p>Transmission networks also have a system operator. In Europe, these are mostly Transmission System Operators (TSOs), which are responsible for operating the transmission networks and also generally own the infrastructure and decide where to expand it. The US has Regional Transmission Organisations (RTOs), which are broadly similar, and Independent System Operators (ISOs) which operate the infrastructure but do not own it - in areas with ISOs there will be a separate transmission owner which is paid by the ISO for its infrastructure. These organisations have several jobs to do. These include:</p>
+<ul class="simple">
+<li><p>Decide on transmission expansion (if they own the infrastructure): we’ll look at this next week</p></li>
+<li><p>Make sure the supply/demand balance is maintained at all times. Grid operators need to ensure that they have enough reserve capacity to meet any unexpected increase in demand or decrease in supply. These reserves are generally procured in markets (in which generators can bid), but the details of these depend on the country we’re talking about, and on the timescale.</p></li>
+<li><p>Make sure they can recover the system in case of blackouts. Again, grid operators can procure black start capability (i.e. the ability to start generating even when you’re not connected to a power source - something many generators cannot do as they need electricity to start their turbines and/or operate their safety mechanisms) in a market they design.</p></li>
+<li><p>Ensure that no line limits are exceeded. If power flows on a line are higher than its maximum capacity, transmission lines (which are, essentially, big chunks of metal) will start to heat up and expand. This can cause short circuits, as well as other types of damage. Transformers and other bits of kit connecting lines can also be damaged if their capacities are exceeded. Worse, if lines or transformers are damaged, the effects of this can quickly spread throughout a network, as power flows transfer to other lines, which are then subsequently overloaded. It is therefore important to respect the physical limits of the network. Ensuring this is called congestion management.</p></li>
+<li><p>Sometimes grid operators also run the market - i.e. the platforms which electricity market participants use to trade.
+(as well as a number of other things).</p></li>
+</ul>
+<p>In this notebook, we’ll focus on congestion management. The economics element of the other tasks is easier - e.g. for reserves, TSOs simply need to figure out how much they need (which isn’t straightforward at all but not primarily an economics problem) and invite generators to bid, for instance, the amount of money they would need to provide this reserve capacity. The TSO can then select the cheapest generators. Congestion management is harder because it is intimately related to the design of wholesale markets itself. There are roughly speaking, three approaches. Most European markets have a market design which is sometimes called uniform pricing or copperplate pricing in which physical networks are ignored by the market and TSOs manage congestion afterwards. Most N and S American/Australian markets have a design called nodal pricing which incorporates physical constraints in the market itself. In between, Scandinavian countries (and some others) have a system called zonal pricing. We’ll go through these in turn to explore how markets and physical networks interact in each of them, and what the difference is. Finally, we’ll look at a more advanced issue that comes up primarily in nodal pricing markets, as a taster to show you what interesting areas for future research exist and just how complicated electricity markets can get.</p>
+<p>This is not an electrical engineering course, so like in the previous notebook we will conveniently ignore the intricacies of alternating current networks (and therefore, reactive power; markets for reactive power also exist) - instead I’ll use a DC approximation. As before, we will also confine ourselves to wholesale markets, which is where most of the action happens anyway.</p>
+<section id="uniform-pricing">
+<h2>Uniform pricing<a class="headerlink" href="#uniform-pricing" title="Permalink to this heading">#</a></h2>
+<p>In a uniform pricing market, the electricity market ignores any physical constraints. Electricity can be traded from anywhere to anywhere, without any consideration of where it is produced or consumed. This means there is one single price for the entire market in each time period. Of course, this might result in power flows violating physical limits. Wholesale market participants therefore have to inform the system operator what they are planning to produce/consume, at gate closure, which is usually an hour (UK) to 15 minutes (some US markets) before delivery. After gate closure, the system operator calculates power flows, and if these are found to violate physical constraints, the system operator can redispatch generators - asking some to increase production, and some to decrease production (and paying them for this!), until flow limits are satisfied.</p>
+<p>The widget below lets you experiment with this. This is a snapshot model, which only considers one time period (1 hour long, such that MW=MWh as before). The system consists of three nodes, or buses, connected by three lines with equal reactances - you can set the line capacities. At each bus, there are two generators, one cheap, and one expensive. The market is assumed to be perfectly competitive - generators bid their costs. Demand is fixed (so completely inelastic). There are no start-up costs, unit commitment decisions, minimum run levels, etc.</p>
+<p>Demand at each bus is fixed (i.e. perfectly inelastic) and equal to 15MWh in this time period. The capacity of the expensive generators (g2, g4, g6) is large enough to never be a constraint. You can set the capacity of the cheaper generators (g1, g3, g5). Generation costs are:</p>
+<p>g1: £10/MWh
+g2: £40/MWh
+g3: £20/MWh
+g4: £50/MWh
+g5: £30/MWh
+g6: £60/MWh</p>
+<p>The figure on the left shows generation levels, demand, and line flows that are predicted at gate closure. Line flows are green if no constraints are violated, and red if they are. The figure on the right shows the amount of redispatch (e.g., if this is 5, it means that generator is asked to increase its production by 5MW; if it is -5 that generator is asked to decrease its production by 5MW) and the resulting line flows.</p>
+<p>Play around with this model. Do you understand why Do you understand why prices are what they are? When are redispatch costs the highest?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pypsa</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># from jupyter_dash import JupyterDash</span>
+<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select wind capacity in Scotland:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-wind-scotland&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select wind capacity in England:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-wind-england&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select wind capacity in Wales:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-wind-wales&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select gas capacity in Scotland:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-gas-scotland&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select gas capacity in England:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-gas-england&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select gas capacity in Wales:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-gas-wales&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select tranmission capacity between Scotland and England:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-transmission-SE&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select tranmission capacity between Wales and Scotland:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-transmission-WS&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select tranmission capacity between England and Wales:&quot;</span><span class="p">),</span>
+        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-transmission-EW&quot;</span><span class="p">,</span>
+            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="nb">max</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span>
+            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4001</span><span class="p">,</span> <span class="mi">250</span><span class="p">)},</span>
+        <span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
+    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-wind-scotland&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-wind-england&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-wind-wales&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-gas-scotland&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-gas-england&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-gas-wales&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-transmission-SE&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-transmission-WS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-transmission-EW&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
+
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="n">wind_capacity_scotland</span><span class="p">,</span> <span class="n">wind_capacity_england</span><span class="p">,</span> <span class="n">wind_capacity_wales</span><span class="p">,</span>
+         <span class="n">gas_capacity_scotland</span><span class="p">,</span> <span class="n">gas_capacity_england</span><span class="p">,</span> <span class="n">gas_capacity_wales</span><span class="p">,</span>
+         <span class="n">transmission_SE</span><span class="p">,</span> <span class="n">transmission_WS</span><span class="p">,</span> <span class="n">transmission_EW</span><span class="p">):</span>
+
+    <span class="c1"># carbon emissions in tCO2/MWh</span>
+    <span class="n">carbon_emissions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}</span>
+    <span class="c1"># operational costs in £/MWh</span>
+    <span class="n">operational_costs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+    <span class="c1"># marginal costs in £/MWh</span>
+    <span class="n">carbon_price</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">marginal_costs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="n">carbon_emissions</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">carbon_price</span> <span class="o">+</span> <span class="n">operational_costs</span><span class="p">[</span><span class="s1">&#39;Wind&#39;</span><span class="p">],</span>
+                      <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="n">carbon_emissions</span><span class="p">[</span><span class="s1">&#39;Gas&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">carbon_price</span> <span class="o">+</span> <span class="n">operational_costs</span><span class="p">[</span><span class="s1">&#39;Gas&#39;</span><span class="p">]}</span>
+    <span class="c1"># power plant capacities (nominal powers in MW)</span>
+    <span class="n">power_plant_p_nom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Scotland&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="n">wind_capacity_scotland</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="n">gas_capacity_scotland</span><span class="p">},</span>
+                         <span class="s1">&#39;England&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="n">wind_capacity_england</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="n">gas_capacity_england</span><span class="p">},</span>
+                         <span class="s1">&#39;Wales&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Wind&quot;</span><span class="p">:</span> <span class="n">wind_capacity_wales</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">:</span> <span class="n">gas_capacity_wales</span><span class="p">}}</span>
+    <span class="c1"># country electrical loads in MW (not necessarily realistic)</span>
+    <span class="n">loads</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Scotland&quot;</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">:</span> <span class="mi">4000</span><span class="p">,</span> <span class="s1">&#39;Wales&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">}</span>
+    <span class="c1"># transmission capacities in MW (not necessarily realistic)</span>
+    <span class="n">transmission</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Scotland&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;England&quot;</span><span class="p">:</span> <span class="n">transmission_SE</span><span class="p">,</span> <span class="s2">&quot;Wales&quot;</span><span class="p">:</span> <span class="n">transmission_WS</span><span class="p">},</span>
+        <span class="s2">&quot;Wales&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;England&quot;</span><span class="p">:</span> <span class="n">transmission_EW</span><span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">network</span> <span class="o">=</span> <span class="n">pypsa</span><span class="o">.</span><span class="n">Network</span><span class="p">()</span>
+    <span class="c1"># snapshots labelled by [0,1,2,3]</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Scotland&quot;</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;Wales&#39;</span><span class="p">]</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Scotland&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">57.</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">4.2</span><span class="p">},</span> <span class="s1">&#39;England&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">52.1</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">0.17</span><span class="p">},</span> <span class="s1">&#39;Wales&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">52.0</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">3.8</span><span class="p">}}</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">set_snapshots</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;Bus&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="c1"># p_max_pu is variable for wind</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;Scotland&#39;</span><span class="p">:</span>
+            <span class="n">wind_availability</span> <span class="o">=</span> <span class="mf">0.8</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;England&#39;</span><span class="p">:</span>
+            <span class="n">wind_availability</span> <span class="o">=</span> <span class="mf">0.4</span>
+        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s1">&#39;Wales&#39;</span><span class="p">:</span>
+            <span class="n">wind_availability</span> <span class="o">=</span> <span class="mf">0.6</span>
+        <span class="k">for</span> <span class="n">tech</span> <span class="ow">in</span> <span class="n">power_plant_p_nom</span><span class="p">[</span><span class="n">c</span><span class="p">]:</span>
+            <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+                <span class="s2">&quot;Generator&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">tech</span><span class="p">),</span>
+                <span class="n">bus</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                <span class="n">p_nom</span><span class="o">=</span><span class="n">power_plant_p_nom</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">tech</span><span class="p">],</span>
+                <span class="n">marginal_cost</span><span class="o">=</span><span class="n">marginal_costs</span><span class="p">[</span><span class="n">tech</span><span class="p">],</span>
+                <span class="n">p_max_pu</span><span class="o">=</span><span class="p">([</span><span class="n">wind_availability</span><span class="p">]</span> <span class="k">if</span> <span class="n">tech</span> <span class="o">==</span> <span class="s2">&quot;Wind&quot;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">)</span>
+
+    <span class="c1"># load which varies over the snapshots</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">country</span><span class="p">:</span>
+        <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="s2">&quot;Load&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> load&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">),</span>
+            <span class="n">bus</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+            <span class="n">p_set</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">loads</span><span class="p">[</span><span class="n">c</span><span class="p">]]),</span>
+        <span class="p">)</span>
+
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Line&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Scotland - England line&quot;</span><span class="p">,</span>
+        <span class="n">bus0</span><span class="o">=</span><span class="s1">&#39;Scotland&#39;</span><span class="p">,</span>
+        <span class="n">bus1</span><span class="o">=</span><span class="s1">&#39;England&#39;</span><span class="p">,</span>
+        <span class="n">s_nom</span><span class="o">=</span><span class="n">transmission</span><span class="p">[</span><span class="s1">&#39;Scotland&#39;</span><span class="p">][</span><span class="s1">&#39;England&#39;</span><span class="p">],</span>
+        <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Line&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Wales - Scotland line&quot;</span><span class="p">,</span>
+        <span class="n">bus0</span><span class="o">=</span><span class="s1">&#39;Wales&#39;</span><span class="p">,</span>
+        <span class="n">bus1</span><span class="o">=</span><span class="s1">&#39;Scotland&#39;</span><span class="p">,</span>
+        <span class="n">s_nom</span><span class="o">=</span><span class="n">transmission</span><span class="p">[</span><span class="s1">&#39;Scotland&#39;</span><span class="p">][</span><span class="s1">&#39;Wales&#39;</span><span class="p">],</span>
+        <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">network</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="s2">&quot;Line&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;England - Wales line&quot;</span><span class="p">,</span>
+        <span class="n">bus0</span><span class="o">=</span><span class="s1">&#39;England&#39;</span><span class="p">,</span>
+        <span class="n">bus1</span><span class="o">=</span><span class="s1">&#39;Wales&#39;</span><span class="p">,</span>
+        <span class="n">s_nom</span><span class="o">=</span><span class="n">transmission</span><span class="p">[</span><span class="s1">&#39;Wales&#39;</span><span class="p">][</span><span class="s1">&#39;England&#39;</span><span class="p">],</span>
+        <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">r</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">network</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">solver_name</span><span class="o">=</span><span class="s1">&#39;highs&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">network_figure</span><span class="p">():</span>
+
+        <span class="c1"># plot the network</span>
+        <span class="c1"># gen = network.generators.assign(g=network.generators_t.p.mean()).groupby([&quot;bus&quot;]).g.sum()</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="n">mapbox</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mapbox_style</span><span class="o">=</span><span class="s1">&#39;carto-positron&#39;</span><span class="p">,</span> <span class="n">mapbox_parameters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;zoom&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span> <span class="n">iplot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;t&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;l&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;b&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">network_figure</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8066</span><span class="p">,</span> <span class="n">jupyter_height</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="100%"
+            height="1200"
+            src="http://127.0.0.1:8066/"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:linopy.model: Solve problem using Highs solver
+INFO:linopy.io: Writing time: 0.02s
+INFO:linopy.solvers:Log file at C:\Users\alyden\AppData\Local\Temp\highs.log.
+INFO:linopy.constants: Optimization successful: 
+Status: ok
+Termination condition: optimal
+Solution: 9 primals, 22 duals
+Objective: 6.13e+04
+Solver model: available
+Solver message: optimal
+
+INFO:pypsa.optimization.optimize:The shadow-prices of the constraints Generator-fix-p-lower, Generator-fix-p-upper, Line-fix-s-lower, Line-fix-s-upper, Kirchhoff-Voltage-Law were not assigned to the network.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Block3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="electricity_market_basics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Electricity market basics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="electricity_investment.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Investment in electricity markets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-pricing">Uniform pricing</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew Lyden
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
