@@ -434,159 +434,8 @@ not taken into account by producers or consumers when they make decisions about 
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from jupyter_dash import JupyterDash</span>
-<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
-    <span class="p">]),</span>
-    
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve intercept:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-supply-intercept&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)}),</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve slope:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-supply-slope&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)})</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select demand curve intercept:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-demand-intercept&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)},)</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select demand curve slope:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-demand-slope&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)})</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select externality value:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-externality-value&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)})</span>
-    <span class="p">])</span>
-<span class="p">])</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
-    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-supply-intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-supply-slope&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-demand-intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-demand-slope&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-externality-value&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">supply_intercept</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">supply_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">demand_function</span><span class="p">(</span><span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">demand_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">demand_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">social_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">private_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">):</span>
-        <span class="n">quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">demand_intercept</span> <span class="o">-</span> <span class="n">supply_intercept</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">supply_slope</span> <span class="o">-</span> <span class="n">demand_slope</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">quantity</span>
-    <span class="k">def</span> <span class="nf">private_price_calc</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">):</span>
-        <span class="n">price</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-        <span class="k">return</span> <span class="n">price</span>
-    <span class="k">def</span> <span class="nf">social_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">demand_intercept</span> <span class="o">-</span> <span class="n">supply_intercept</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">supply_slope</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">-</span> <span class="n">demand_slope</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">quantity</span>
-    <span class="k">def</span> <span class="nf">social_price_calc</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">price</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-        <span class="k">return</span> <span class="n">price</span>
-    <span class="k">def</span> <span class="nf">deadweight_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">,</span> <span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">):</span>
-        <span class="n">deadweight</span> <span class="o">=</span> <span class="p">(</span><span class="n">private_quantity</span> <span class="o">-</span> <span class="n">social_quantity</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">social_price_at_private_quantity</span> <span class="o">-</span> <span class="n">private_price</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="k">return</span> <span class="n">deadweight</span>
-
-    <span class="n">df_supply</span> <span class="o">=</span> <span class="n">supply_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">)</span>
-    <span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_supply</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig1</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Supply curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_demand</span> <span class="o">=</span> <span class="n">demand_function</span><span class="p">(</span><span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">)</span>
-    <span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_demand</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig2</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Demand curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_social</span> <span class="o">=</span> <span class="n">social_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_social</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig3</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Social cost curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig1</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig2</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig3</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="n">private_quantity</span> <span class="o">=</span> <span class="n">private_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">)</span>
-    <span class="n">private_price</span> <span class="o">=</span> <span class="n">private_price_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">)</span>
-    <span class="n">social_quantity</span> <span class="o">=</span> <span class="n">social_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">social_price</span> <span class="o">=</span> <span class="n">social_price_calc</span><span class="p">(</span><span class="n">social_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">social_price_at_private_quantity</span> <span class="o">=</span> <span class="n">social_price_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">deadweight_value</span> <span class="o">=</span> <span class="n">deadweight_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">,</span> <span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">)</span>
-
-    <span class="n">fig_shape1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">,</span> <span class="n">social_price</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;LightGreen&quot;</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;toself&quot;</span><span class="p">))</span>
-    <span class="n">deadweight_text</span> <span class="o">=</span> <span class="s2">&quot;Deadweight: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">deadweight_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">fig_shape1</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">deadweight_text</span><span class="p">)</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig_shape1</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=private_price, x1=private_quantity, y1=private_price, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=private_quantity, y0=0, x1=private_quantity, y1=private_price, line=dict(color=&quot;LightGrey&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=social_price, x1=social_quantity, y1=social_price, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=social_quantity, y0=0, x1=social_quantity, y1=social_price, line=dict(color=&quot;LightGrey&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=social_price_at_private_quantity, x1=private_quantity, y1=social_price_at_private_quantity, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="k">return</span> <span class="n">fig</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8061</span><span class="p">,</span> <span class="n">jupyter_height</span><span class="o">=</span><span class="mi">950</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/externalities-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">850</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -594,9 +443,9 @@ not taken into account by producers or consumers when they make decisions about 
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="100%"
-            height="950"
-            src="http://127.0.0.1:8061/"
+            width="800"
+            height="850"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/externalities-1"
             frameborder="0"
             allowfullscreen
             
@@ -614,181 +463,8 @@ not taken into account by producers or consumers when they make decisions about 
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from jupyter_dash import JupyterDash</span>
-<span class="kn">from</span> <span class="nn">dash</span> <span class="kn">import</span> <span class="n">Dash</span><span class="p">,</span> <span class="n">dcc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Output</span>
-<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">dash_bootstrap_components</span> <span class="k">as</span> <span class="nn">dbc</span>
-
-<span class="n">app</span> <span class="o">=</span> <span class="n">Dash</span><span class="p">(</span><span class="n">external_stylesheets</span><span class="o">=</span><span class="p">[</span><span class="n">dbc</span><span class="o">.</span><span class="n">themes</span><span class="o">.</span><span class="n">BOOTSTRAP</span><span class="p">])</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Container</span><span class="p">([</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="c1"># html.H4(&quot;Budget constraint&quot;),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;graph&quot;</span><span class="p">)</span>
-    <span class="p">]),</span>
-    
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve intercept:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-supply-intercept&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)}),</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select supply curve slope:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-supply-slope&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">)})</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select demand curve intercept:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-demand-intercept&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">125</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">201</span><span class="p">,</span> <span class="mi">25</span><span class="p">)},)</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select demand curve slope:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-demand-slope&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)})</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select externality value:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-externality-value&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)})</span>
-    <span class="p">]),</span>
-    <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span>
-        <span class="n">html</span><span class="o">.</span><span class="n">P</span><span class="p">(</span><span class="s2">&quot;Select tax per unit of quantity:&quot;</span><span class="p">),</span>
-        <span class="n">dcc</span><span class="o">.</span><span class="n">Slider</span><span class="p">(</span>
-            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;slider-tax-value&quot;</span><span class="p">,</span>
-            <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="nb">max</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-            <span class="n">step</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">marks</span><span class="o">=</span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">5</span><span class="p">)})</span>
-    <span class="p">]),</span>
-<span class="p">])</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">(</span>
-    <span class="n">Output</span><span class="p">(</span><span class="s2">&quot;graph&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-supply-intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-supply-slope&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-demand-intercept&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-demand-slope&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-externality-value&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span>
-    <span class="n">Input</span><span class="p">(</span><span class="s2">&quot;slider-tax-value&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)</span>
-<span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="n">supply_intercept</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">externality</span><span class="p">,</span> <span class="n">tax</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">supply_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">supply_intercept</span> <span class="o">+</span> <span class="n">tax</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">demand_function</span><span class="p">(</span><span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">demand_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">demand_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">social_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">private_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">):</span>
-        <span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">y_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_</span><span class="p">:</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-            <span class="n">y_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-        <span class="n">df_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Quantity&#39;</span><span class="p">:</span> <span class="n">x_</span><span class="p">,</span> <span class="s1">&#39;Price&#39;</span><span class="p">:</span> <span class="n">y_</span><span class="p">})</span>
-        <span class="k">return</span> <span class="n">df_plot</span>
-    <span class="k">def</span> <span class="nf">private_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">):</span>
-        <span class="n">quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">demand_intercept</span> <span class="o">-</span> <span class="n">supply_intercept</span> <span class="o">-</span> <span class="n">tax</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">supply_slope</span> <span class="o">-</span> <span class="n">demand_slope</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">quantity</span>
-    <span class="k">def</span> <span class="nf">private_price_calc</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">):</span>
-        <span class="n">price</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">+</span> <span class="n">supply_intercept</span> <span class="o">+</span> <span class="n">tax</span>
-        <span class="k">return</span> <span class="n">price</span>
-    <span class="k">def</span> <span class="nf">social_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">quantity</span> <span class="o">=</span> <span class="p">(</span><span class="n">demand_intercept</span> <span class="o">-</span> <span class="n">supply_intercept</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">supply_slope</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">-</span> <span class="n">demand_slope</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">quantity</span>
-    <span class="k">def</span> <span class="nf">social_price_calc</span><span class="p">(</span><span class="n">quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">):</span>
-        <span class="n">price</span> <span class="o">=</span> <span class="n">supply_slope</span> <span class="o">*</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">externality</span> <span class="o">+</span> <span class="n">supply_intercept</span>
-        <span class="k">return</span> <span class="n">price</span>
-    <span class="k">def</span> <span class="nf">deadweight_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">,</span> <span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">):</span>
-        <span class="n">deadweight</span> <span class="o">=</span> <span class="p">(</span><span class="n">private_quantity</span> <span class="o">-</span> <span class="n">social_quantity</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">social_price_at_private_quantity</span> <span class="o">-</span> <span class="n">private_price</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="k">return</span> <span class="n">deadweight</span>
-
-    <span class="n">df_supply</span> <span class="o">=</span> <span class="n">supply_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">)</span>
-    <span class="n">fig1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_supply</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig1</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Supply curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_demand</span> <span class="o">=</span> <span class="n">demand_function</span><span class="p">(</span><span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">)</span>
-    <span class="n">fig2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_demand</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig2</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Demand curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_social</span> <span class="o">=</span> <span class="n">social_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">fig3</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_social</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig3</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Social cost curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">df_private</span> <span class="o">=</span> <span class="n">private_cost_function</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">)</span>
-    <span class="n">fig4</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df_private</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Quantity&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Price&#39;</span><span class="p">,</span> <span class="n">range_x</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">],</span> <span class="n">range_y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">fig4</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">line_color</span><span class="o">=</span><span class="s1">&#39;LightBlue&#39;</span><span class="p">,</span> <span class="n">line_dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Private cost curve&#39;</span><span class="p">,</span> <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig1</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig2</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig3</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig4</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="n">private_quantity</span> <span class="o">=</span> <span class="n">private_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">)</span>
-    <span class="n">private_price</span> <span class="o">=</span> <span class="n">private_price_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">tax</span><span class="p">)</span>
-    <span class="n">social_quantity</span> <span class="o">=</span> <span class="n">social_quantity_calc</span><span class="p">(</span><span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">demand_slope</span><span class="p">,</span> <span class="n">demand_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">social_price</span> <span class="o">=</span> <span class="n">social_price_calc</span><span class="p">(</span><span class="n">social_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">social_price_at_private_quantity</span> <span class="o">=</span> <span class="n">social_price_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">supply_slope</span><span class="p">,</span> <span class="n">supply_intercept</span><span class="p">,</span> <span class="n">externality</span><span class="p">)</span>
-    <span class="n">deadweight_value</span> <span class="o">=</span> <span class="n">deadweight_calc</span><span class="p">(</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">,</span> <span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">)</span>
-
-    <span class="n">fig_shape1</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">private_quantity</span><span class="p">,</span> <span class="n">private_quantity</span><span class="p">,</span> <span class="n">social_quantity</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">private_price</span><span class="p">,</span> <span class="n">social_price_at_private_quantity</span><span class="p">,</span> <span class="n">social_price</span><span class="p">],</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;LightGreen&quot;</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;toself&quot;</span><span class="p">))</span>
-    <span class="n">deadweight_text</span> <span class="o">=</span> <span class="s2">&quot;Deadweight: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">deadweight_value</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">fig_shape1</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">deadweight_text</span><span class="p">)</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">fig_shape1</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=private_price, x1=private_quantity, y1=private_price, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=private_quantity, y0=0, x1=private_quantity, y1=private_price, line=dict(color=&quot;LightGrey&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=social_price, x1=social_quantity, y1=social_price, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=social_quantity, y0=0, x1=social_quantity, y1=social_price, line=dict(color=&quot;LightGrey&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="c1"># fig.add_shape(type=&quot;line&quot;, x0=0, y0=social_price_at_private_quantity, x1=private_quantity, y1=social_price_at_private_quantity, line=dict(color=&quot;red&quot;, width=3, dash=&quot;dash&quot;))</span>
-
-    <span class="k">return</span> <span class="n">fig</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">run_server</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;inline&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">8061</span><span class="p">,</span> <span class="n">jupyter_height</span><span class="o">=</span><span class="mi">950</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/externalities-2&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">950</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -796,9 +472,9 @@ not taken into account by producers or consumers when they make decisions about 
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="100%"
+            width="800"
             height="950"
-            src="http://127.0.0.1:8061/"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/externalities-2"
             frameborder="0"
             allowfullscreen
             
