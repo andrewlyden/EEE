@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Energy and Environmental Economics</title>
+    <title>Marginal Abatement Cost Curve &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -63,9 +63,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Block1/Untitled-1';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Block2/macc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Environmental cost benefit analysis" href="cba.html" />
+    <link rel="prev" title="Environmental economics tools" href="policy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,15 +171,15 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Microeconomics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="consumer_theory.html">Consumer Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="producer_theory.html">Producer Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equilibrium.html">Equilibirum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/consumer_theory.html">Consumer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/producer_theory.html">Producer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/competition.html">Competition</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block2/externalities.html">Externalities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/climate_negotiations.html">Climate negotiations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/environmental_assessment.html">Environmental assessment</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Marginal Abatement Cost Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cba.html">Environmental cost benefit analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
 <ul class="nav bd-sidenav">
@@ -236,7 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/andrewlyden/EEE/blob/main/Block1/Untitled-1.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/andrewlyden/EEE/blob/main/Block2/macc.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2FBlock1/Untitled-1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2FBlock2/macc.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +318,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Block1/Untitled-1.ipynb" target="_blank"
+      <li><a href="../_sources/Block2/macc.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -396,7 +400,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Marginal Abatement Cost Curve</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -405,9 +409,11 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-cost-and-emissions">Marginal cost and emissions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplier-options-in-response-to-carbon-tax">Supplier options in response to carbon tax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-wide-marginal-abatement-cost-curve-macc">Market-wide marginal abatement cost curve (MACC)</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -418,25 +424,72 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="marginal-abatement-cost-curve">
+<h1>Marginal Abatement Cost Curve<a class="headerlink" href="#marginal-abatement-cost-curve" title="Permalink to this heading">#</a></h1>
+<p>As you have learned in the previous section, externalities play a crucial role in environmental issues especially as an economic tool for considering pollution. This week we will explore the Marginal Abatement Cost Curve (MACC) which serves as a pivotal tool in addressing these externalities by providing a systematic approach to evaluating the cost-effectiveness of various pollution reduction measures.</p>
+<p>Given the negative externalities associated with pollution, there is a collective need to reduce it. This reduction, however, entails costs for the entities responsible for the pollution. The challenge lies in finding the most efficient and economically viable ways to decrease pollution while considering the broader social and environmental context. The Marginal Abatement Cost Curve is a tool used to navigate this challenge. It systematically organises and evaluates different pollution reduction measures based on their cost-effectiveness. The curve illustrates the relationship between the quantity of pollution reduced and the associated costs for each method.</p>
+<p>The MAC Curve ranks pollution reduction methods from the most to least cost-effective. Methods positioned at the beginning of the curve represent measures that can achieve significant pollution reduction at a relatively low cost. This efficiency is crucial in addressing externalities since it allows for the reduction of negative environmental impacts without imposing an undue economic burden on polluting entities.</p>
+<section id="marginal-cost-and-emissions">
+<h2>Marginal cost and emissions<a class="headerlink" href="#marginal-cost-and-emissions" title="Permalink to this heading">#</a></h2>
+<p>In Block 1 we have seen how marginal pricing influences choices for consumers and producers in competitive markets.</p>
+<ul class="simple">
+<li><p>In consumer theory, marginal pricing plays a role in your decisions as a buyer. Imagine you’re deciding whether to buy one more unit of a product. The marginal utility, or the extra satisfaction you get from that extra unit, bumps into the marginal price, affecting your decision on whether it’s worth it.</p></li>
+<li><p>In producer theory it’s about making one more unit of a product and considering the cost involved. This is the marginal cost – the extra cost of producing one more unit. Producers use marginal pricing to figure out the sweet spot where the cost of making more aligns with the revenue they’ll get.</p></li>
+<li><p>In a competitive market, where many players are vying for your business, the interaction between marginal cost and revenue is crucial. Marginal pricing guides producers in deciding how much to produce to maximize their profits, playing a crucial role in keeping markets balanced.</p></li>
+</ul>
+<p>In the context of a Marginal Abatement Cost Curve (MACCC) the “marginal” part is important. Imagine you’re deciding how much pollution to cut – the MACC helps us see the cost of cutting by one more unit. This “marginal abatement cost” is the price tag for reducing one more unit of pollution. So, just like we tweak our choices in buying and producing in regular economics, the MACC can be used to help us make smarter decisions about options for reducing pollution. “Abatement” in this context means a reduction, e.g., a reduction in carbon emissions.</p>
+<p>It is useful to understand how we go from marginal cost to marginal cost of emissions to marginal cost of emission abatement as seen in these equations:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Marginal Cost (£/unit)} = \frac{\Delta\text{Cost of Production (£)}}{\Delta\text{Quantity of Production (unit)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Marginal Cost of Emissions (£/ton)} = \frac{\Delta\text{Cost of Emissions (£)}}{\Delta\text{Quantity of Emissions (tons)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{Marginal Cost of Emission Abatement (£/ton)} = \frac{\Delta\text{Cost of Emission Abatement (£)}}{\Delta\text{Quantity of Emission Abatement (tons)}}
+\]</div>
+</section>
+<section id="supplier-options-in-response-to-carbon-tax">
+<h2>Supplier options in response to carbon tax<a class="headerlink" href="#supplier-options-in-response-to-carbon-tax" title="Permalink to this heading">#</a></h2>
+<p>A carbon tax serves as a lever, to internalise the costs of the supplier’s carbon emissions, and consequently, incentivises implementing carbon reduction measures.</p>
+<p>Using the graph below, you can explore how different carbon tax rates and carbon emission levels influence the choice of carbon reduction options implemented.</p>
+<p>Play with the levels of carbon tax and see if you understand how this influences the choice of carbon reduction option if you can only pick one? Does your answer change when you can pick multiple options? How sensitive are the results to changes in the carbon tax rate?</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
-<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://dash-trial-cda6d582dfe4.herokuapp.com/&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/macc-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
-            width="1000"
-            height="750"
-            src="https://dash-trial-cda6d582dfe4.herokuapp.com/"
+            width="100%"
+            height="600"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/macc-1"
             frameborder="0"
             allowfullscreen
             
         ></iframe>
         </div></div>
 </div>
+<p>If you’d like to create your own MACC then go here - <a class="reference external" href="https://tamc.github.io/macc/">https://tamc.github.io/macc/</a>.</p>
+</section>
+<section id="market-wide-marginal-abatement-cost-curve-macc">
+<h2>Market-wide marginal abatement cost curve (MACC)<a class="headerlink" href="#market-wide-marginal-abatement-cost-curve-macc" title="Permalink to this heading">#</a></h2>
+<p>Now, let’s look at it from the perspective of someone studying government policies. Think of it like this on a larger scale for the whole market. Just like companies have their own specific costs for reducing emissions, society as a whole has its own cost. An environmental data science team, through research on policies and technologies, can figure out how much we can reduce emissions and the costs involved for different things like electric cars, wind and solar power, rules about fuels, and projects that take care of the land. With this info, public policies can focus on adopting the technologies that are not too expensive first, kind of like picking the easiest and cheapest options to make a positive impact on the environment.</p>
+<p>This graph is a famous MAC from 2009 by McKinsey, each rectangle stands for a specific thing we can do, like using LED lights or putting Carbon Capture Systems in old coal plants. If a rectangle is wider, it means we can reduce more emissions with that action. If it’s taller, it means that action is more expensive. One side shows how much we can reduce emissions (that’s the x-axis), and the other side shows the cost (in euros per ton of CO2, that’s the y-axis).</p>
+<p>It’s a big deal because it shows the trade-offs in one picture for greenhouse gas emissions from different places and all around the world. So, someone making rules or coming up with new ideas or even someone investing money can look at this and decide to focus on things where we can cut down on emissions without spending too much.</p>
+<p><img alt="mckinsey" src="../_images/McKinsey_Cost_Curve_670w.png" /></p>
+<p>Looking at the chart above, something that might catch your attention is the idea of negative costs, which can be a bit surprising. Let’s take LEDs, for example (they show about - €100 per ton of CO2). This negative cost means that for every investment that reduces CO2 from traditional lighting by 1 ton, the investor actually saves €100. Basically, it’s like saying you get money back for doing something good for the environment. In a way, these are investments that make sense not just for the environment but also for saving money. One reason people might not jump to buy things like $5 LED light bulbs, even though they’re good for the environment, is because it’s sometimes hard to see the long-term benefits when we’re thinking about short-term decisions.</p>
+<p>People argue about why these negative costs happen, but one common idea is that in our current way of doing things, there are problems like not enough rewards or information. This can stop people in the market from taking full advantage of the benefits of investing in technologies that actually save money in the long run.</p>
+<p>This graph is quite old now and new similar curves are being developed - for example, see <a class="reference external" href="https://www.edf.org/revamped-cost-curve-reaching-net-zero-emissions">https://www.edf.org/revamped-cost-curve-reaching-net-zero-emissions</a>.</p>
+<p>There are also new ways which look to expand the cost analysis to lifetime costs - for example the IPCC 6th Assessment Report included this diagram - <a class="reference external" href="https://www.ipcc.ch/report/ar6/wg3/figures/summary-for-policymakers/figure-spm-7/">https://www.ipcc.ch/report/ar6/wg3/figures/summary-for-policymakers/figure-spm-7/</a>.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -451,7 +504,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./Block1"
+            path: "./Block2"
         },
         predefinedOutput: true
     }
@@ -468,6 +521,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="policy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Environmental economics tools</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cba.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Environmental cost benefit analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -482,9 +553,11 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-cost-and-emissions">Marginal cost and emissions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supplier-options-in-response-to-carbon-tax">Supplier options in response to carbon tax</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-wide-marginal-abatement-cost-curve-macc">Market-wide marginal abatement cost curve (MACC)</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

@@ -8,12 +8,12 @@ parts:
     chapters:
     - file: Block1/consumer_theory
     - file: Block1/producer_theory
-    - file: Block1/equilibrium
+    - file: Block1/competition
   - caption: Environmental Economics
     chapters:
-    - file: Block2/externalities
-    - file: Block2/climate_negotiations
-    - file: Block2/environmental_assessment
+    - file: Block2/policy
+    - file: Block2/macc
+    - file: Block2/cba
   - caption: Electricity Markets
     chapters:
     - file: Block3/electricity_market_basics
