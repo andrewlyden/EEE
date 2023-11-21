@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>&lt;no title&gt; &#8212; Energy and Environmental Economics</title>
+    <title>Environmental cost benefit analysis &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -63,9 +63,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Block1/Untitled-1';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Block2/cba';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Electricity market basics" href="../Block3/electricity_market_basics.html" />
+    <link rel="prev" title="Marginal Abatement Cost Curve" href="macc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,15 +169,15 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Microeconomics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="consumer_theory.html">Consumer Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="producer_theory.html">Producer Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="equilibrium.html">Equilibirum</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/consumer_theory.html">Consumer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/producer_theory.html">Producer Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block1/competition.html">Competition</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block2/externalities.html">Externalities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/climate_negotiations.html">Climate negotiations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/environmental_assessment.html">Environmental assessment</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macc.html">Marginal Abatement Cost Curve</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Environmental cost benefit analysis</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
 <ul class="nav bd-sidenav">
@@ -236,7 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/andrewlyden/EEE/blob/main/Block1/Untitled-1.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/andrewlyden/EEE/blob/main/Block2/cba.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -284,7 +286,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2FBlock1/Untitled-1.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/andrewlyden/EEE/issues/new?title=Issue%20on%20page%20%2FBlock2/cba.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +316,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/Block1/Untitled-1.ipynb" target="_blank"
+      <li><a href="../_sources/Block2/cba.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -396,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Environmental cost benefit analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -405,9 +407,12 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-value-of-money">Time Value of Money</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interest">Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-future-value-and-the-discount-factor">Present Value, Future Value, and the Discount Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-environmental-impacts">Including environmental impacts</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -418,25 +423,22 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
-<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://dash-trial-cda6d582dfe4.herokuapp.com/&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-        <iframe
-            width="1000"
-            height="750"
-            src="https://dash-trial-cda6d582dfe4.herokuapp.com/"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="environmental-cost-benefit-analysis">
+<h1>Environmental cost benefit analysis<a class="headerlink" href="#environmental-cost-benefit-analysis" title="Permalink to this heading">#</a></h1>
+<section id="time-value-of-money">
+<h2>Time Value of Money<a class="headerlink" href="#time-value-of-money" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="interest">
+<h2>Interest<a class="headerlink" href="#interest" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="present-value-future-value-and-the-discount-factor">
+<h2>Present Value, Future Value, and the Discount Factor<a class="headerlink" href="#present-value-future-value-and-the-discount-factor" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="including-environmental-impacts">
+<h2>Including environmental impacts<a class="headerlink" href="#including-environmental-impacts" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en">https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en</a></p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -451,7 +453,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./Block1"
+            path: "./Block2"
         },
         predefinedOutput: true
     }
@@ -468,6 +470,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="macc.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Marginal Abatement Cost Curve</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Block3/electricity_market_basics.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Electricity market basics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -482,9 +502,12 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-value-of-money">Time Value of Money</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interest">Interest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-future-value-and-the-discount-factor">Present Value, Future Value, and the Discount Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-environmental-impacts">Including environmental impacts</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
