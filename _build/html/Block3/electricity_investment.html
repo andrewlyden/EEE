@@ -7,9 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Investment in electricity markets &#8212; Energy and Environmental Economics</title>
+    <title>Investment and Renewable Energy Support &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -66,7 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Block3/electricity_investment';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Electricity grids" href="electricity_grids.html" />
+    <link rel="next" title="Electricity Grids" href="electricity_grids.html" />
+    <link rel="prev" title="Electricity Market Basics" href="electricity_market_basics.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,15 +175,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block2/policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/policy.html">Tools for Environmental Economics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Block2/macc.html">Marginal Abatement Cost Curve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/cba.html">Environmental cost benefit analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/cba.html">Cost Benefit Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Energy Markets</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="electricity_market_basics.html">Electricity market basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="electricity_grids.html">Electricity grids</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Investment in electricity markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electricity_market_basics.html">Electricity Market Basics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Investment and Renewable Energy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electricity_grids.html">Electricity Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sector_coupling.html">Sector Coupling</a></li>
 </ul>
 
     </div>
@@ -384,7 +386,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -395,11 +399,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Investment in electricity markets</h1>
+    <h1>Investment and Renewable Energy Support</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#screening-curves">Screening curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investment-stage-in-market-models">Investment stage in market models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-energy-support-schemes">Renewable Energy Support Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-energy-auction-design">Renewable Energy Auction Design</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -409,8 +424,256 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="investment-in-electricity-markets">
-<h1>Investment in electricity markets<a class="headerlink" href="#investment-in-electricity-markets" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="investment-and-renewable-energy-support">
+<h1>Investment and Renewable Energy Support<a class="headerlink" href="#investment-and-renewable-energy-support" title="Permalink to this heading">#</a></h1>
+<p>This week we are looking at investment in electricity markets. Specifically, we will look at how we can understand and model investment incentives, and how policy can influence these. We will first look at a simple way of thinking about investment, using screening curves. We will then see an example of a more complex modelling method which can include much more detail.</p>
+<section id="screening-curves">
+<h2>Screening curves<a class="headerlink" href="#screening-curves" title="Permalink to this heading">#</a></h2>
+<p>Electricity demand fluctuates from hour to hour. Because of this, an optimal electricity generation mix, i.e. the particular combination of power plants that can serve the market, will likely consist of a number of different types of power plants. Some will be used most of the time - these are base load power plants, which generally have high investment costs but low marginal cost. Then there are mid-load plants, which are used often but not all the time (with medium investment costs and medium marginal costs) and peak load power plants which are only used when demand is very high. Peak load power plants generally have a low investment cost, but a high marginal cost. An optimal (i.e. lowest total cost) generation mix generally has all these types, because it is not worth building expensive base load power plants to cover all demand (as some of them will not be used all the time), but it’s also a waste of money to only use peak load plants as they might be cheap to build, but if you’re running them all the time this is false economy, as their running costs are high.</p>
+<p>Screening curves can visualise the trade-off between investment and operational costs and show what the optimal mix of technologies might look like. Before we look at one, we need a representation of energy demand. A time series of electricity demand might look like this (I have plotted 100 hours here for demonstration only - of course for real-world investment purposes you’d want data to cover several years, although in larger models it is common to cluster that data into a smaller number clusters consisting of similar hours to save computation time): of money to only use peak load plants as they might be cheap to build, but if you’re running them all the time this is false economy, as their running costs are high. Screening curves can visualise the trade-off between investment and operational costs and show what the optimal mix of technologies might look like. Before we look at one, we need a representation of energy demand. A time series of electricity demand might look like this (I have plotted 100 hours here for demonstration only - of course for real-world investment purposes you’d want data to cover several years, although in larger models it is common to cluster that data into a smaller number clusters consisting of similar hours to save computation time):</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">hvplot.pandas</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1"># Sample data (replace this with your actual data)</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>  <span class="c1"># Use hourly frequency</span>
+<span class="n">hours_in_day</span> <span class="o">=</span> <span class="mi">24</span>
+
+<span class="c1"># Simulate higher demand in winter than summer and daily peaks</span>
+<span class="n">base_demand</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">120</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">i</span> <span class="o">%</span> <span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="n">hours_in_day</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="n">hours_in_day</span><span class="p">))</span> <span class="o">+</span>
+    <span class="mi">30</span> <span class="o">*</span> <span class="p">((</span><span class="mi">7</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">hours_in_day</span> <span class="o">&lt;=</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">17</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">hours_in_day</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">))</span>
+<span class="p">]</span>
+
+<span class="c1"># Introduce random noise</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># Set seed for reproducibility</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">))</span>  <span class="c1"># Adjust the scale for the amount of noise</span>
+<span class="n">demand_with_noise</span> <span class="o">=</span> <span class="n">base_demand</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Datetime&#39;</span><span class="p">:</span> <span class="n">date_range</span><span class="p">,</span> <span class="s1">&#39;Electrical Demand&#39;</span><span class="p">:</span> <span class="n">demand_with_noise</span><span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Create a line chart using hvplot</span>
+<span class="n">hv_plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">hvplot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Datetime&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Electrical Demand Over a Year with Seasonal and Daily Peaks&#39;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Datetime&#39;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Demand (Units)&#39;</span>
+<span class="p">)</span>
+
+<span class="c1"># Convert hvplot to Plotly figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">hv_plot</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">plotly</span><span class="p">()</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">c</span>:\Users\alyden\OneDrive - University of Edinburgh\Python\EEE\Block3\electricity_investment.ipynb Cell 5 line 3
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=29&#39;</span><span class="o">&gt;</span><span class="mi">30</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">hv_plot</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">hvplot</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=30&#39;</span><span class="o">&gt;</span><span class="mi">31</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Datetime&#39;</span><span class="p">,</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=31&#39;</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=34&#39;</span><span class="o">&gt;</span><span class="mi">35</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Demand (Units)&#39;</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=35&#39;</span><span class="o">&gt;</span><span class="mi">36</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="p">)</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=37&#39;</span><span class="o">&gt;</span><span class="mi">38</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Convert hvplot to Plotly figure</span>
+<span class="o">---&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=38&#39;</span><span class="o">&gt;</span><span class="mi">39</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">hv_plot</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">plotly</span><span class="p">()</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=40&#39;</span><span class="o">&gt;</span><span class="mi">41</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># Show the plot</span>
+     <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/c%3A/Users/alyden/OneDrive%20-%20University</span><span class="si">%20o</span><span class="s1">f</span><span class="si">%20E</span><span class="s1">dinburgh/Python/EEE/Block3/electricity_investment.ipynb#X14sZmlsZQ%3D%3D?line=41&#39;</span><span class="o">&gt;</span><span class="mi">42</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">fig</span>
+
+<span class="ne">AttributeError</span>: &#39;ElementConversion&#39; object has no attribute &#39;plotly&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we now sort this time series, arranging the 100 hours in order from largest to smallest demand levels, we obtain a load duration curve:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Sample data (replace this with your actual data)</span>
+<span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">date_range</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;H&#39;</span><span class="p">)</span>  <span class="c1"># Use hourly frequency</span>
+<span class="n">hours_in_day</span> <span class="o">=</span> <span class="mi">24</span>
+
+<span class="c1"># Simulate higher demand in winter than summer and daily peaks</span>
+<span class="n">base_demand</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">120</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">i</span> <span class="o">%</span> <span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="n">hours_in_day</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="n">hours_in_day</span><span class="p">))</span> <span class="o">+</span>
+    <span class="mi">30</span> <span class="o">*</span> <span class="p">((</span><span class="mi">7</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">hours_in_day</span> <span class="o">&lt;=</span> <span class="mi">11</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">17</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">hours_in_day</span> <span class="o">&lt;=</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">))</span>
+<span class="p">]</span>
+
+<span class="c1"># Introduce random noise</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># Set seed for reproducibility</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">date_range</span><span class="p">))</span>  <span class="c1"># Adjust the scale for the amount of noise</span>
+<span class="n">demand_with_noise</span> <span class="o">=</span> <span class="n">base_demand</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Datetime&#39;</span><span class="p">:</span> <span class="n">date_range</span><span class="p">,</span> <span class="s1">&#39;Electrical Demand&#39;</span><span class="p">:</span> <span class="n">demand_with_noise</span><span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Sort the data by demand in descending order</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Calculate the cumulative percentage of time</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cumulative Percentage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="c1"># Create a load duration curve using Plotly Express</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Cumulative Percentage&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Load Duration Curve&#39;</span><span class="p">,</span>
+              <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Electrical Demand&#39;</span><span class="p">:</span> <span class="s1">&#39;Demand (Units)&#39;</span><span class="p">,</span> <span class="s1">&#39;Cumulative Percentage&#39;</span><span class="p">:</span> <span class="s1">&#39;Cumulative Percentage&#39;</span><span class="p">})</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>From this we can see that, for instance, demand exceeds 10GW in only around 5 of the 100 hours, so around 5% of the time. We can now combine this load duration curve with a screening curve, which is simply a plot of the total (investment + fuel) cost of different generation technologies as a function of the number of hours the technologies are used. Consider the example below. The bottom diagram in this example if the screening curve - the load duration curve is on top. The screening curve shows, for the default options in this case, that gas capacity is the cheapest technology if it is used less than about 30 hours, nuclear is cheaper if it is used more than about 45 hours, and coal is cheaper if it is used between 30-45 and hours. If we find the break-even points between the technologies and map them on the load duration curve, we can see that,</p>
+<ul class="simple">
+<li><p>because demand is above 4.9GW for 45 hours, an optimal solution includes 4.9GW of nuclear capacity. If we would install more, this capacity would be used for less than 45 hours, in which case, as we can see in the screening curve, it is better to choose another technology</p></li>
+<li><p>because demand is above 6.1GW for 30 hours, an optimal solution includes 6.1 - 4.9 = 1.2GW of coal-fired capacity.</p></li>
+<li><p>the remaining 8GW of generation capacity needed to cover peak demand will be satisfied with gas-fired capacity, as this capacity will be used less than 30 hours.</p></li>
+</ul>
+<p>The widget will let you explore this further. You can impose a nuclear or gas capacity subsidy (which decreases the fixed costs of production - or if you set it to a negative level it function as a tax which increases costs) and/or generation subsidy (which decreases, or increases if negative, the marginal cost of generation). Can you find a set of subsidies/taxes that drives coal out of the market? Can you achieve that with only capacity or generation subsidies, or do you need both? Can you shift the whole system to use only one type of generation? Do you understand how the optimal capacities change in response to your policy choices?</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1"># Data for different thermal power plant technologies</span>
+<span class="n">full_load_hours</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8001</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)]</span>  <span class="c1"># 0 to 8000 in increments of 1000</span>
+
+<span class="c1"># Linear equation for total annual cost based on run hours</span>
+<span class="k">def</span> <span class="nf">calculate_costs</span><span class="p">(</span><span class="n">run_hours</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">hours</span> <span class="k">for</span> <span class="n">hours</span> <span class="ow">in</span> <span class="n">run_hours</span><span class="p">]</span>
+
+<span class="c1"># Parameters for each technology</span>
+<span class="n">natural_gas_intercept</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">natural_gas_slope</span> <span class="o">=</span> <span class="mf">0.06</span>
+
+<span class="n">coal_intercept</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">coal_slope</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+<span class="n">nuclear_intercept</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">nuclear_slope</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="c1"># Calculate total annual costs for each technology</span>
+<span class="n">natural_gas_costs</span> <span class="o">=</span> <span class="n">calculate_costs</span><span class="p">(</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">natural_gas_intercept</span><span class="p">,</span> <span class="n">natural_gas_slope</span><span class="p">)</span>
+<span class="n">coal_costs</span> <span class="o">=</span> <span class="n">calculate_costs</span><span class="p">(</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">coal_intercept</span><span class="p">,</span> <span class="n">coal_slope</span><span class="p">)</span>
+<span class="n">nuclear_costs</span> <span class="o">=</span> <span class="n">calculate_costs</span><span class="p">(</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">nuclear_intercept</span><span class="p">,</span> <span class="n">nuclear_slope</span><span class="p">)</span>
+
+<span class="c1"># Create traces for each technology</span>
+<span class="n">trace_gas</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">natural_gas_costs</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines+markers&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Natural Gas&#39;</span><span class="p">)</span>
+<span class="n">trace_coal</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">coal_costs</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines+markers&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Coal&#39;</span><span class="p">)</span>
+<span class="n">trace_nuclear</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">full_load_hours</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">nuclear_costs</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines+markers&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Nuclear&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create layout</span>
+<span class="n">layout</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Screening Curves for Thermal Power Plant Technologies&#39;</span><span class="p">,</span>
+    <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Full Load Hours&#39;</span><span class="p">),</span>
+    <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Total Annual Costs&#39;</span><span class="p">),</span>
+    <span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># Create figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">trace_gas</span><span class="p">,</span> <span class="n">trace_coal</span><span class="p">,</span> <span class="n">trace_nuclear</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">layout</span><span class="p">)</span>
+
+<span class="c1"># Show the figure</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The example above had no renewables, but these can easily be included as long as it is never optimal to curtail renewables. Renewable production can simply be subtracted from demand to generate a net demand curve, which will lead to a different optimal conventional generation mix. Existing generation capacity can also be included - this would have a zero investment cost (as it already exist).</p>
+</section>
+<section id="investment-stage-in-market-models">
+<h2>Investment stage in market models<a class="headerlink" href="#investment-stage-in-market-models" title="Permalink to this heading">#</a></h2>
+<p>Screening curves are a good first approximation to analyse optimal investment in electricity markets - and therefore also investment levels we might see in a perfectly competitive market. However, there are many things that cannot be included in screening curves. Because the demand data is sorted to obtain the load duration curve, all information about the temporal sequence of time period is lost. Technologies such as storage, which shift demand from one time period to the next, are therefore difficult to include, as are ramping constraints, start-ups, etc. Grid constraints, which can limit how power plants can be used, can also not be included.</p>
+<p>For a more detailed analysis of investment in electricity markets (and therefore, for instance, also the effect of policies that target investment), it is possible to extend the market models that we have seen before to include an investment stage. In the widget below, you can explore this. I have taken one of the optimal dispatch models from the previous weeks, but gave the model the option to not just dispatch existing plants, but also to invest in new capacity (which can then subsequently be dispatched - hence ‘multi-level’). For simplicity, I’ve assumed an investment cost of £10/MW for investment in all six generators. You can set the maximum amount of new capacity investment, which will be the same in all locations. The table below the line diagram gives the optimal investment levels (in MW) for each of the generators.</p>
+<p>Experiment with this. Where does investment take place, depending on your chosen parameters? How does generation investment interact with line capacity? What happens to prices if you allow investment? Do you understand these changes?</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-investment-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">710</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="100%"
+            height="710"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-investment-1"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>Of course, this model is very simple. A more realistic model could include</p>
+<ul class="simple">
+<li><p>multiple time periods, as in the first example on this notebook</p></li>
+<li><p>some of the technical constraints on generators that we have explored in previous weeks.</p></li>
+<li><p>a demand function, instead of perfectly inelastic demand. This would make the model quadratic, as the objective would now be a maximisation of social welfare.</p></li>
+<li><p>a representation of uncertainty about fuel costs, demand, etc., e.g., by having a set of scenarios for each of these parameters, with the objective minimising expected costs. This would make it a stochastic model.</p></li>
+<li><p>multiple investment stages (e.g., with investment decisions happening every few years), which gives the model the option to not invest right now but wait and see what will happen to some of the uncertain parameters. This would make it a multi-stage model.</p></li>
+<li><p>a measure of risk aversion, such that the objective would not be to minimise expected costs but some risk metric. This would make it a stochastic riskaverse model or, if we care about expected costs but want the model to come up with a feasible solution in all cases, a robust model.</p></li>
+<li><p>more levels, e.g. an explicit representation of the system operator engaging in redispatch; line outages, etc,</p></li>
+<li><p>game theory elements, e.g. different investors in a market that is imperfectly competitive. This is harder, as we then need to solve a number of optimisation models simultaneously, making the problem an equilibrium problem.</p></li>
+</ul>
+<p>The flexible nature of these type of models mean that almost anything can be included (but if you make models too large and complex, they will become difficult or impossible to solve, and interpreting the results will be difficult in any case!). There is specialist optimisation software (e.g., GAMS, AIMMS, Fico Xpress, etc.) that can solve these problems efficiently; in addition, more and more packages for open-source alternatives such Python and Julia are being released, which can help build and solve a model quickly.</p>
+</section>
+<section id="renewable-energy-support-schemes">
+<h2>Renewable Energy Support Schemes<a class="headerlink" href="#renewable-energy-support-schemes" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="http://www.open-electricity-economics.org/book/text/08.html#renewable-energy-support-schemes">http://www.open-electricity-economics.org/book/text/08.html#renewable-energy-support-schemes</a></p>
+</section>
+<section id="renewable-energy-auction-design">
+<h2>Renewable Energy Auction Design<a class="headerlink" href="#renewable-energy-auction-design" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="http://www.open-electricity-economics.org/book/text/09.html#renewable-energy-auction-design">http://www.open-electricity-economics.org/book/text/09.html#renewable-energy-auction-design</a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -444,13 +707,22 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="electricity_grids.html"
+       href="electricity_market_basics.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Electricity grids</p>
+        <p class="prev-next-title">Electricity Market Basics</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="electricity_grids.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Electricity Grids</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -458,6 +730,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#screening-curves">Screening curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investment-stage-in-market-models">Investment stage in market models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-energy-support-schemes">Renewable Energy Support Schemes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renewable-energy-auction-design">Renewable Energy Auction Design</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

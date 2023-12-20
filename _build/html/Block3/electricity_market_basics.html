@@ -7,9 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Electricity market basics &#8212; Energy and Environmental Economics</title>
+    <title>Electricity Market Basics &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Block3/electricity_market_basics';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Electricity grids" href="electricity_grids.html" />
-    <link rel="prev" title="Environmental cost benefit analysis" href="../Block2/cba.html" />
+    <link rel="next" title="Investment and Renewable Energy Support" href="electricity_investment.html" />
+    <link rel="prev" title="Cost Benefit Analysis" href="../Block2/cba.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -175,15 +175,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block2/policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/policy.html">Tools for Environmental Economics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Block2/macc.html">Marginal Abatement Cost Curve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block2/cba.html">Environmental cost benefit analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block2/cba.html">Cost Benefit Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Energy Markets</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Electricity market basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="electricity_grids.html">Electricity grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="electricity_investment.html">Investment in electricity markets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Electricity Market Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electricity_investment.html">Investment and Renewable Energy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="electricity_grids.html">Electricity Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sector_coupling.html">Sector Coupling</a></li>
 </ul>
 
     </div>
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Electricity market basics</h1>
+    <h1>Electricity Market Basics</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -415,6 +416,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-for-great-britain">Example for Great Britain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-technical-constraints">Including technical constraints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markets-in-the-real-world">Markets in the real world</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-toy-model">Fun toy model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-data">Real data</a></li>
 </ul>
             </nav>
         </div>
@@ -427,26 +430,32 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="electricity-market-basics">
-<h1>Electricity market basics<a class="headerlink" href="#electricity-market-basics" title="Permalink to this heading">#</a></h1>
-<p>In this notebook, we will look at the basics of energy market operation. We will not yet consider energy networks, but instead look at an energy market located in a single point (so that we do not need to worry about any physical constraints on energy flows). NB: this notebook is heavy on computation, so it might take a while to load the examples.</p>
-<p>This is not an electrical engineering course, so we will conveniently going to ignore very short-term operational problems (e.g., dynamics, and other things that happen in electrical systems on very short timescales of milliseconds to minutes); we will also ignore the intricacies of our modern alternating current networks. These are interesting but out of scope here. We will also confine ourselves to wholesale markets, where generators sell electricity to wholesale consumers (i.e., utilities and large industrial consumers). Utilities sell the power they buy on to consumers in consumer markets. These are less interesting from the perspective of energy market analysis, as consumers generally sign long-term contracts to buy electricity at a fixed price per unit, and competition depends more on marketing and service levels than on economics. You would expect, however, prices in consumer markets to be equal to a long-term average of wholesale market prices (as these represent the utility’s input costs), plus a markup to cover the utility’s other costs and profits, plus taxes. In the UK, consumer prices are approximately twice as high as wholesale market prices, but they do correlate over a number of years.</p>
+<h1>Electricity Market Basics<a class="headerlink" href="#electricity-market-basics" title="Permalink to this heading">#</a></h1>
+<p>This is the first week of Block 3 - Energy Markets. This week we will look at the basics of electricity markets. We will then look at investment and renewable support schemes, followed by electricity grids and sector coupling which looks beyond electricity to other energy sectors.</p>
+<p>We will not yet consider energy networks, but instead look at an energy market located in a single point (so that we do not need to worry about any physical constraints on energy flows). This is not an electrical engineering course, so we will conveniently going to ignore very short-term operational problems (e.g., dynamics, and other things that happen in electrical systems on very short timescales of milliseconds to minutes); we will also ignore the intricacies of our modern alternating current networks. These are interesting but out of scope here.</p>
+<p>We will also confine ourselves to wholesale markets, where generators sell electricity to wholesale consumers (i.e., utilities and large industrial consumers). Utilities sell the power they buy on to consumers in consumer markets. These are less interesting from the perspective of energy market analysis, as consumers generally sign long-term contracts to buy electricity at a fixed price per unit, and competition depends more on marketing and service levels than on economics. You would expect, however, prices in consumer markets to be equal to a long-term average of wholesale market prices (as these represent the utility’s input costs), plus a markup to cover the utility’s other costs and profits, plus taxes. In the UK, consumer prices are approximately twice as high as wholesale market prices, but they do correlate over a number of years.</p>
+<p>This week we will look at:</p>
+<ul class="simple">
+<li><p><strong>Economic dispatch</strong> explores the supply/demand curves for electricity curves, which show how price is formed.</p></li>
+<li><p>Externalities such as carbon emissions need to be internalised, and this can be done through a <strong>carbon tax</strong> on generators.</p></li>
+<li><p>Economic dispatch can be looked at for a single time period, or across <strong>multiple time periods</strong>, particularly with variable renewable power generation such as wind power.</p></li>
+<li><p><strong>Energy storage</strong> is emerging as a prominent technology in electricity markets in order to manage temporal and spatial mismatch between supply and demand.</p></li>
+<li><p>Our simple economic models can be extended to include techincal constraints of generators such as minimum ramp up/down and minimum run times (these are called <strong>unit committment</strong> problems).</p></li>
+</ul>
+<p>This course will focus on the economic aspects of the electricity market - however, it is important to have a grasp of the technical fundamentals of electricity markets. For a refresher please see - <a class="reference external" href="http://www.open-electricity-economics.org/book/text/01.html#overview-of-electric-power-systems">http://www.open-electricity-economics.org/book/text/01.html#overview-of-electric-power-systems</a>.</p>
 <section id="economic-dispatch">
 <h2>Economic dispatch<a class="headerlink" href="#economic-dispatch" title="Permalink to this heading">#</a></h2>
-<p>The diagram below shows a simple example of four periods of energy market operation. Energy demand in the periods is assumed to be perfectly inelastic (i.e., not sensitive to prices), which is a reasonable approximation in the short term. Each period lasts 1 hour, such that, if a generator generates at 1MW in a particular period, it has generated 1MWh (i.e. MWs and MWhs are equivalent). Demand is given by</p>
-<p>Period 1 1 MWh
-Period 2 2 MWh
-Period 3 3 MWh
-Period 4 4 MWh</p>
-<p>There are three types of generation. We have 2.1GW of coal-fired generation capacity, which has a constant marginal fuel cost of 8£/MWh and 2GW of gasfired generation a cost of 10£/MWh, while wind generation has no cost but a limited availability. Because of varying wind conditions, in each period, only the following percentage of its installed capacity is available:</p>
-<p>Period 1 0 %
-Period 2 0.5 %
-Period 3 0.35 %
-Period 4 0.9 %</p>
-<p>You can choose the amount of installed wind capacity. In addition to their fuel costs, generators have to pay a carbon price if you select a nonzero value. Coal-fired generators emit 0.1t/MWh, and gas-fired generators 0.05t/MWh. Carbon prices are per tonne and due on all carbon the generators emit. Wind generators have no carbon emissions.</p>
-<p>The widget below shows the optimal generation levels and prices which are obtained when we look for the intersection of the demand and supply curves in each period. This is also the perfectly competitive equilibrium, as we know that, without externalities or other distortions, perfect competition gives us the optimal quantities and prices. In mathematical terms, since there is no consumer surplus here (as the demand curve is vertical), we can obtain this point by minimising the total cost of generation (generation times variable generation costs, summed over all generators and all time periods), subject to a constraint that specifies that the sum of generation has to meet demand in each time period. Generation decisions are called dispatch decisions, so the generation levels correspond to optimal dispatch (or economic dispatch). The supply curve shows the merit order, i.e., the order in which generators should be dispatched in an optimal solution.</p>
-<p>Experiment with the economic dispatch model below. Do you understand why prices are what they are (Note: they are the cost of the most expensive unit that is still producing, i.e. the price at the intersection of the supply and demand curves)? What happens to prices if we add progressively more wind into the system? Do you understand why? (this is called the merit order effect, because wind changes the supply curve). Would you be happy if you were one of the first to invest in wind turbines?</p>
-<p>What happens if you increase carbon prices? Can you see coal and gas change place in the merit order? Do carbon emissions actually change if you increase the price? Why/why not?</p>
-<p>If you had some energy storage capacity, when would you charge/discharge this? Would you be happy with more renewables or higher carbon prices, or not?</p>
+<p>Given the many different ways of consuming and generating electricity, two central questions arise:</p>
+<ul class="simple">
+<li><p>What is the most efficient way to deploy consuming and generating assets in the short-run?</p></li>
+<li><p>How should we invest in assets in the long-run to maximise economic welfare?</p></li>
+</ul>
+<p>Economic dispatch explores these questions by attempting to answer how we cost optimally dispatch electrical generation and storage to meet demand. Electricity markets have several important differences compared to other commodity markets. At every instant in time, consumption must be balanced with generation. If you throw a switch to turn on a light, somewhere a generator will be increasing its output to compensate. If the power is not balanced in the grid, the power supply will collapse and there will be blackouts. It is not possible to run an electricity market for every single second, for practical reasons (the network must be checked for stability, etc.). So electricity is traded in blocks of time, e.g. hourly, 14:00-15:00, or quarter-hourly,
+14:00-14:15, well in advance of the time when it is actually consumed (based on forecasts). Additional markets trade in backup balancing power, which step in if the forecasts are wrong.</p>
+<p>The app below shows a simple example energy market operation for a single time period. Energy demand is assumed to be perfectly inelastic (i.e., not sensitive to prices), which is a reasonable approximation in short term analysis. The period lasts 1 hour, such that, if a generator generates at 1MW in a particular period, it has generated 1MWh (i.e. MWs and MWhs are equivalent).  There are three types of generation.</p>
+<p>We have coal-fired generation capacity, which has a constant marginal fuel cost of 8£/MWh, and gas-fired generation a cost of 10£/MWh, while wind generation has no cost but a limited availability. Because of varying wind conditions only a percentage of its installed capacity is available.</p>
+<p>The app below shows the optimal generation levels and prices which are obtained when we look for the intersection of the demand and supply curves in each period. This is also the perfectly competitive equilibrium, as we know that, without externalities or other distortions, perfect competition gives us the optimal quantities and prices. In mathematical terms, since there is no consumer surplus here (as the demand curve is vertical), we can obtain this point by minimising the total cost of generation (generation times variable generation costs, summed over all generators and all time periods), subject to a constraint that specifies that the sum of generation has to meet demand in each time period. Generation decisions are called dispatch decisions, so the generation levels correspond to optimal dispatch (or economic dispatch). The supply curve shows the <strong>merit order</strong>, i.e., the order in which generators should be dispatched in an optimal solution.</p>
+<p>Experiment with the economic dispatch model below. Do you understand why prices are what they are (Note: they are the cost of the most expensive unit that is still producing, i.e. the price at the intersection of the supply and demand curves)? What happens to prices if we add progressively more wind into the system? Do you understand why? (this is called the merit order effect, because wind changes the supply curve).</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -475,7 +484,9 @@ Period 4 0.9 %</p>
 </section>
 <section id="carbon-pricing">
 <h2>Carbon pricing<a class="headerlink" href="#carbon-pricing" title="Permalink to this heading">#</a></h2>
-<p>Spiel on carbon pricing.</p>
+<p>The implementation of a carbon tax introduces a price on carbon emissions, internalizing the external costs associated with pollution and climate change. By assigning a monetary value to carbon emissions, the carbon tax incentivises power generators to minimise their environmental impact and opt for cleaner energy sources. As a result, the economic dispatch process becomes a tool for achieving a more environmentally friendly and economically efficient electricity generation mix.</p>
+<p>The app below fixes most of the inputs for economic dispatch in the above app, but allows you to vary a carbon price. In addition to their fuel costs, generators have to pay a carbon price if you select a nonzero value. In this example, we have set coal-fired generators as emitting 0.1t/MWh, and gas-fired generators as emitting 0.05t/MWh (please find better sources for this if using in your assignments). Carbon prices are per tonne and due on all carbon the generators emit. Wind generators have no carbon emissions.</p>
+<p>What happens if you increase carbon prices? Can you see coal and gas change place in the merit order? Do carbon emissions actually change if you increase the price? Why/why not?</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -504,7 +515,9 @@ Period 4 0.9 %</p>
 </section>
 <section id="multiple-time-periods">
 <h2>Multiple time periods<a class="headerlink" href="#multiple-time-periods" title="Permalink to this heading">#</a></h2>
-<p>apply above for multiple time periods…</p>
+<p>The above economic dispatch apps are for a single time period. However, when incorporating variable renewable generation such as wind power, it is important to look over multiple time periods.</p>
+<p>Experiment with the app below and see how the merit order changes in different time periods. The 2nd graph shows the power dispatches to meet demand.</p>
+<p>NB - the wind profile is created using random numbers and changes everytime you select a different time period.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -533,7 +546,7 @@ Period 4 0.9 %</p>
 </section>
 <section id="energy-storage">
 <h2>Energy storage<a class="headerlink" href="#energy-storage" title="Permalink to this heading">#</a></h2>
-<p>Energy storage and how it impacts here…</p>
+<p>Explore the app below to see how a energy storage might operate in a high wind scenario. The black dotted line shows the “state of charge” of the storage - i.e., how much energy is stored. What is happening as this increases and decreases? If you had some energy storage capacity, when would you charge/discharge this? Would you be happy with more renewables or higher carbon prices, or not?</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -562,17 +575,26 @@ Period 4 0.9 %</p>
 </section>
 <section id="example-for-great-britain">
 <h2>Example for Great Britain<a class="headerlink" href="#example-for-great-britain" title="Permalink to this heading">#</a></h2>
+<p>We have so far only explored very simplified versions of electricity markets which typically involve numerous technologies. Below shows a modelled dispatch of Great Britain’s generation types in 2016.</p>
 <p><img alt="GB" src="../_images/2016_generation_dispatch.png" /></p>
 </section>
 <section id="including-technical-constraints">
 <h2>Including technical constraints<a class="headerlink" href="#including-technical-constraints" title="Permalink to this heading">#</a></h2>
-<p>The example above assumed that you could dispatch each generator at any level between 0 and its capacity. In reality, this is not the case. Conventional generators (coal, gas, etc.), in particular, generally have many constraints on their operations. Once important constraint is that they generally cannot increase or decrease their production very quickly - it takes time to make large adjustments to output, similarly to how a car cannot go from 0 to 200mph instantaneously. These constraints are called ramping constraints. They limit the amount of generation possible in a particular period to be within a given range of the generation in the previous period. Generators that are very flexible (e.g., newer gas-fired generators) can ramp quickly. Generators that are inflexible (e.g. especially older nuclear power plants) cannot ramp quickly.</p>
+<p>The examples above assumed that you could dispatch each generator at any level between 0 and its capacity. In reality, this is not the case. Conventional generators (coal, gas, etc.), in particular, generally have many constraints on their operations. Once important constraint is that they generally cannot increase or decrease their production very quickly - it takes time to make large adjustments to output, similarly to how a car cannot go from 0 to 200mph instantaneously. These constraints are called ramping constraints. They limit the amount of generation possible in a particular period to be within a given range of the generation in the previous period. Generators that are very flexible (e.g., newer gas-fired generators) can ramp quickly. Generators that are inflexible (e.g. especially older nuclear power plants) cannot ramp quickly.</p>
 <p>In addition to ramping constraints, conventional generators generally have minimum run levels. They cannot produce a positive amount below these levels. A 1GW generator might, for instance have a minimum run level of 50%, which means that it can only either generate nothing, or generate between 0.5 and 1GW. Generators therefore do not only decide how much to generate, but also whether they will generate at all. To make this more complicated, it generally takes time to start up a generator, so if a generator is turned off, it may not be able to generate anything in the immediate future. Generators might also have minimum up and down times, such that when they turn off they have to remain off for a number of periods, and when they are on, they have to remain on for a number of time periods. Decisions about being on or off are called unit commitment decisions. They are binary - units are either on (“online”) or off (“offline”). Economic dispatch problems with unit commitment constraints are sometimes called unit commitment problems.</p>
 </section>
 <section id="markets-in-the-real-world">
 <h2>Markets in the real world<a class="headerlink" href="#markets-in-the-real-world" title="Permalink to this heading">#</a></h2>
 <p>The above models are representations of markets. In the real world, depending on the type of market (as we will see next week), there might be a market operator which on a regular (e.g., hourly) basis solves problems similar to those above, but with many more generators and time periods, and generally using bids that generators/consumers have declared instead of their actual costs and benefits. This market operator then instructs the generators and consumers what to do in every period, with penalties for deviating from these instruction. In other markets, such as the UK, there is no centralised dispatch - generators make their own decisions. However, if we assume perfect competition, we would get to the same solution, so large-scale versions of the
 models above can still be used by industry or by researchers to predict what will happen.</p>
+</section>
+<section id="fun-toy-model">
+<h2>Fun toy model<a class="headerlink" href="#fun-toy-model" title="Permalink to this heading">#</a></h2>
+<p>Explore <a class="reference external" href="https://model.energy/">model.energy</a> to explore a toy model which includes more technologies than the simple economic dispatch models used here.</p>
+</section>
+<section id="real-data">
+<h2>Real data<a class="headerlink" href="#real-data" title="Permalink to this heading">#</a></h2>
+<p>At <a class="reference external" href="https://www.epexspot.com/en/market-data?market_area=GB&amp;trading_date=2023-11-22&amp;delivery_date=2023-11-23&amp;underlying_year=&amp;modality=Auction&amp;sub_modality=DayAhead&amp;technology=&amp;product=60&amp;data_mode=aggregated&amp;period=&amp;production_period=">epexspot.com</a> you can find the results of the day ahead auction for electricity with supply-demand bid curves for every hour. This only partially maps onto the merit order curve, since electricity is also sold on other markets (e.g. over-the-counter).</p>
 </section>
 </section>
 
@@ -612,15 +634,15 @@ models above can still be used by industry or by researchers to predict what wil
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Environmental cost benefit analysis</p>
+        <p class="prev-next-title">Cost Benefit Analysis</p>
       </div>
     </a>
     <a class="right-next"
-       href="electricity_grids.html"
+       href="electricity_investment.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Electricity grids</p>
+        <p class="prev-next-title">Investment and Renewable Energy Support</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -646,6 +668,8 @@ models above can still be used by industry or by researchers to predict what wil
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-for-great-britain">Example for Great Britain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-technical-constraints">Including technical constraints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markets-in-the-real-world">Markets in the real world</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fun-toy-model">Fun toy model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-data">Real data</a></li>
 </ul>
   </nav></div>
 

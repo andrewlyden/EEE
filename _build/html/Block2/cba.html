@@ -7,9 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Environmental cost benefit analysis &#8212; Energy and Environmental Economics</title>
+    <title>Cost Benefit Analysis &#8212; Energy and Environmental Economics</title>
   
   
   
@@ -63,10 +63,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'Block2/cba';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Electricity market basics" href="../Block3/electricity_market_basics.html" />
+    <link rel="next" title="Electricity Market Basics" href="../Block3/electricity_market_basics.html" />
     <link rel="prev" title="Marginal Abatement Cost Curve" href="macc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,15 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy.html">Tools for Environmental Economics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macc.html">Marginal Abatement Cost Curve</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Environmental cost benefit analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cost Benefit Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Energy Markets</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_market_basics.html">Electricity market basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_grids.html">Electricity grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_investment.html">Investment in electricity markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_market_basics.html">Electricity Market Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_investment.html">Investment and Renewable Energy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_grids.html">Electricity Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/sector_coupling.html">Sector Coupling</a></li>
 </ul>
 
     </div>
@@ -398,7 +401,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Environmental cost benefit analysis</h1>
+    <h1>Cost Benefit Analysis</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,7 +414,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-value-of-money">Time Value of Money</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interest">Interest</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-future-value-and-the-discount-factor">Present Value, Future Value, and the Discount Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#net-present-value">Net Present Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-environmental-impacts">Including environmental impacts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-on-investment-roi">Return on Investment (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-of-electricity">Cost of electricity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levelised-cost-of-electricity-lcoe">Levelised cost of electricity (LCOE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-of-renewable-generation">Cost of renewable generation</a></li>
 </ul>
             </nav>
         </div>
@@ -423,20 +431,153 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="environmental-cost-benefit-analysis">
-<h1>Environmental cost benefit analysis<a class="headerlink" href="#environmental-cost-benefit-analysis" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="cost-benefit-analysis">
+<h1>Cost Benefit Analysis<a class="headerlink" href="#cost-benefit-analysis" title="Permalink to this heading">#</a></h1>
+<p>This week we delve into cost benefit analysis methods, leading up to using Net Present Value (NPV) calculations, and ending with Levelised Cost of Electricity (LCOE).</p>
+<ul class="simple">
+<li><p><strong>Time value of money</strong> means that having money now is more valuable than having it in the future, and consequently <strong>interest</strong> is important in making decisions on investment.</p></li>
+<li><p>We can calculate <strong>Net Present Value (NPV)</strong> if we understand the difference between <strong>present and future value</strong>, and how <strong>discount factors</strong> are important.</p></li>
+<li><p>There are complex procedures for including <strong>environmental impacts</strong> in NPV calculations.</p></li>
+<li><p><strong>Return on investment</strong> is the return rate at which NPV = 0, and offers a minimum return rate useful in decision making.</p></li>
+<li><p>There are many aspects to the <strong>cost of electricity</strong>, and we can combine these to calculate the <strong>levelised cost of electricity</strong> which is a measure of the long-run marginal cost of electricity generation.</p></li>
+</ul>
 <section id="time-value-of-money">
 <h2>Time Value of Money<a class="headerlink" href="#time-value-of-money" title="Permalink to this heading">#</a></h2>
+<p>A key idea in finance is the time value of money, which means that having money now is more valuable than having it in the future. You’d prefer to have £100 right away than wait for it. Now, think about it from the other side. What if I owed you money and I really wanted to delay paying you back? To make up for your preference for getting money sooner, I would have to pay you more than what I owed. This extra payment to make up for the time delay is called interest. There’s also another aspect to consider—risk. If you had concerns about whether I could pay you back in the future, you might charge me even more interest to cover that risk.</p>
 </section>
 <section id="interest">
 <h2>Interest<a class="headerlink" href="#interest" title="Permalink to this heading">#</a></h2>
+<p>Interest is an important concept in loans, bonds (which are like special financial papers), and finance in general. Let’s think about it like your bank account. You give some money to the bank, and in return, they pay you for letting them use your money to invest in different things. What they pay you is called interest, and it’s usually shown as a percentage of the money you put in—this percentage is called the interest rate. So, if you deposit £1 in the bank and the interest rate is 5%, you’ll get £0.05 in interest.</p>
+<p>Interest can be paid out at different times, e.g., every month, every three months, every year, or even all the time. If you earn some interest in one year, in the next year, you not only earn interest on the original amount you put in but also on the interest you earned before. This idea is called compounding interest. We can figure out how much £1 will be worth in <span class="math notranslate nohighlight">\(x\)</span> number of years when it’s compounding a <span class="math notranslate nohighlight">\(n\)</span> number of times each year at a specific interest rate.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \text{Value of £1 in x years} &amp; = 1 * (1 + \frac{r}{n}) * (1 + \frac{r}{n}) * ... * (1 + \frac{r}{n}) \\
+                                  &amp; = 1 (1 + \frac{r}{n})^{nx}
+\end{split}\]</div>
 </section>
 <section id="present-value-future-value-and-the-discount-factor">
 <h2>Present Value, Future Value, and the Discount Factor<a class="headerlink" href="#present-value-future-value-and-the-discount-factor" title="Permalink to this heading">#</a></h2>
+<p>Present value is a financial concept that calculates the current worth of future cash flows by considering factors such as the expected cash flows, the time period over which they will be received, and a discount rate. The present value is calculated by taking the future money you expect to get from an investment and bringing it back to today. To do this calculation you need three things: first, you need to know how much money you expect to get (we call this the expected cash flows); second, you need to know how many years you’ll be getting that money for; and third, you need a discount rate. If the discount rate is high, it makes the present value lower, and if it’s low, it makes the present value higher. Bringing these together you can use this forumla:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Present value} = \frac{\text{Future value}}{(1 + r)^n}
+\]</div>
+<p>where r is the rate of return and n is the number of periods.</p>
+<p>Consider a scenario where you expect to earn a £5,000 lump sum payment in five years’ time. If the discount rate is 8.25%, you want to know what that payment will be worth today. So you calculate the present value: <span class="math notranslate nohighlight">\(\frac{£5,000}{(1 + 0.0825)^5} = £3,363.80\)</span></p>
+</section>
+<section id="net-present-value">
+<h2>Net Present Value<a class="headerlink" href="#net-present-value" title="Permalink to this heading">#</a></h2>
+<p>Net present value (NPV) is a financial measuring tool. It’s the difference between the current worth of the money coming in and the money going out over a certain time. We use NPV when deciding on big things like whether a planned investment or project will make us money. It helps us figure out if the project is worth it.</p>
+<p>If there’s one cash flow from a project that will be paid one year from now, then the calculation for the NPV of the project is as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{NPV} = \frac{\text{Cash flow}}{(1 + i)^t} - \text{initial investment}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(i\)</span> is the required return or discount rate, and <span class="math notranslate nohighlight">\(t\)</span> is the number of periods.</p>
+<p>If analysing a longer-term project with multiple cash flows, then the formula for the NPV of the project is as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{NPV} = \sum \frac{\text{R}_t}{(1 + i)^t}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(R_t\)</span> is the net cash flow for single time periods <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Play with the tool below to explore the impact of initial investment, annual cash inflow, discount rate, and number of years in an NPV calculation.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/cba-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">650</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="100%"
+            height="650"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/cba-1"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
 </section>
 <section id="including-environmental-impacts">
 <h2>Including environmental impacts<a class="headerlink" href="#including-environmental-impacts" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en">https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en</a></p>
+<p>Incorporating environmental considerations into the Net Present Value (NPV) analysis can take a full systematic approach encompassing distinct stages.</p>
+<ul class="simple">
+<li><p>Identification of potential environmental impacts is imperative. This involves delineating and characterizing the environmental ramifications associated with the project, spanning factors such as air and water pollution, habitat disruption, and carbon emissions.</p></li>
+<li><p>A quantitative assessment is undertaken to ascertain the magnitude of the identified environmental effects. Quantification methodologies may include the measurement of carbon emissions in terms of CO2 equivalent or the estimation of the monetary value correlated with pollution reduction.</p></li>
+<li><p>The monetization of environmental impacts needs to be assessed. This involves the conversion of quantified environmental impacts into monetary values, a process often facilitated by diverse valuation methodologies such as cost of mitigation, replacement cost, or contingent valuation.</p></li>
+<li><p>Then you can integrate the monetized environmental costs and benefits into the financial framework of the NPV analysis. Adjustments to the project’s cash flows are made to reflect the incorporation of environmental considerations. Specifically, environmental costs are deducted from cash flows, while environmental benefits are added.</p></li>
+<li><p>The discount rate, integral to the NPV calculation above, may undergo adjustment to account for the temporal aspect of environmental impacts. Environmental costs or benefits occurring in the distant future may be subject to heightened discounting.</p></li>
+<li><p>Upon modification of the NPV analysis to encompass environmental considerations, recalculations are conducted to derive an augmented NPV. This integrated evaluation provides a more comprehensive perspective on the project’s sustainability and overall value.</p></li>
+</ul>
+<p>You will try this yourself in this week’s self-assessment question comparing offshore wind turbines, where you will include a cost for an environmental impact in your NPV calculation.</p>
+<p>Further reading - <a class="reference external" href="https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en">https://www.oecd-ilibrary.org/environment/cost-benefit-analysis-and-the-environment_9789264085169-en</a></p>
+</section>
+<section id="return-on-investment-roi">
+<h2>Return on Investment (ROI)<a class="headerlink" href="#return-on-investment-roi" title="Permalink to this heading">#</a></h2>
+<p>The expected return or Return On Investment (ROI) is the required interest rate to reach the point NPV = 0.  We won’t go into details here but you could rearrange the equation for NPV earlier for <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    0 = \text{NPV} = \sum \frac{\text{R}_t}{(1 + i)^t}
+\]</div>
+</section>
+<section id="cost-of-electricity">
+<h2>Cost of electricity<a class="headerlink" href="#cost-of-electricity" title="Permalink to this heading">#</a></h2>
+<p>Broadly speaking all generation costs can be categorized into two groups depending on the point in time at which those costs are incurred: at the time of the investment decision or at the time of the production decision. The costs associated with the investment decision are usually called fixed or investment costs and the costs incurred only at the time of generation are called variable or generation costs.</p>
+<p><strong>Fixed costs</strong> are the cost of equipment, land, financing, project management, grid connection, and construction of the power plant. These are usually expressed per unit of installed capacity (per kW or per MW). Fixed costs are regarded as “sunk costs”, because once the plant is erected and fixed costs are incurred they cannot be recuperated. The plant may be sold or scrapped at some point but such a transaction usually yields only insignificant revenue.</p>
+<p><strong>Variable costs</strong> consist of fuel cost, operation and maintenance expenses and carbon dioxide emission charges, if applicable. They are typically calculated per unit of electricity generated (per MWh). Only variable costs play a role when it is necessary to decide whether to use an existing plant to produce electricity or not. Fixed costs are irrelevant to this production decision for the precise reason that they are sunk. For the investment decision, in contrast, both fixed and variable costs matter, as we will see further on.</p>
+<p><strong>Quasi-fixed costs</strong>. There is a third category that lies between fixed and variable costs, sometimes called quasi-fixed costs, which includes cost of labor; staff can be hired or fired after the investment decision at discrete points in time but not for every single production decision. In electricity generation, such quasi-fixed costs are small enough not to merit separate treatment and are subsumed in variable costs.</p>
+<p><strong>Cost structure of generation technologies</strong>. Electricity generation technologies vary dramatically in their cost structure. Some plants, such as nuclear, wind and solar power, have virtually zero variable costs: once they are built, they produce electricity virtually for free. This is in stark contrast to fossil fuel-based power plants. For example, variable costs (fuel costs and emission charges) comprise approximately 40% of the total costs of a coal-fired power station and as much as 60% of a gas-fired combined cycle plant. In general technologies with low CO2 emissions, which tend to be the technologies that use no fuel, are also those where fixed costs make up a higher percentage of total costs.</p>
+</section>
+<section id="levelised-cost-of-electricity-lcoe">
+<h2>Levelised cost of electricity (LCOE)<a class="headerlink" href="#levelised-cost-of-electricity-lcoe" title="Permalink to this heading">#</a></h2>
+<p>While the distinction between fixed and variable costs of electricity is important, for various analytical and practical purposes it is often useful to compare the “average cost” of generating electricity from different power plants. To this end, fixed and variable costs be meaningfully combined into one single metric.</p>
+<p><strong>LCOE</strong>. A cost metric that is frequently used for this purpose is the levelized cost of electricity (LCOE), also called the levelized energy costs (LEC). This is defined as the aggregated discounted lifetime cost (fixed plus variable costs) of generating electricity per unit of output and is expressed in EUR per MWh. It is calculated using the following formula:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{LCOE} = \frac{C_\text{fix} + \sum_{y=1}^Y a_i (1+r)^{-y} C_y}{\sum_{y=1}^Y (1+ r)^{-y} G_y}
+\]</div>
+<p>where LCOE is the levelized cost in £ per MWh, <span class="math notranslate nohighlight">\(C_{fix}\)</span> is the fixed cost incurred for setting up the project, <span class="math notranslate nohighlight">\(C_y\)</span> are other costs incurred in year <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(r\)</span> is the discount rate, <span class="math notranslate nohighlight">\(Y\)</span> is the technical lifetime in years, and <span class="math notranslate nohighlight">\(G_y\)</span> is electricity generation in MWh. The costs are called levelized because they are “leveled” over all units of output. Levelized costs can be calculated for a specific power plant or for generic types of generation technologies.</p>
+<p>LCOE varies for technologies, but may also vary between geographical regions.</p>
+<p><img alt="LCOE" src="../_images/LCOE.png" /></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/cba-2&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="100%"
+            height="180"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/cba-2"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p><strong>NB: Treat with care since LCOE treats all generation equally and doesn’t take account of time or place of generation! This means that generation which can’t be used because of network constraints or mismatch with timing of demand is still treated equally.</strong></p>
+</section>
+<section id="cost-of-renewable-generation">
+<h2>Cost of renewable generation<a class="headerlink" href="#cost-of-renewable-generation" title="Permalink to this heading">#</a></h2>
+<p>There is much more detail we can go into in cost benefit analysis. The cost of renewable energy has dramatically impacted on the investment in decarbonising energy systems in recent times. Please look at this webpage for more details on this - <a class="reference external" href="http://www.open-electricity-economics.org/book/text/06.html#cost-of-renewable-electricity">http://www.open-electricity-economics.org/book/text/06.html#cost-of-renewable-electricity</a>.</p>
 </section>
 </section>
 
@@ -484,7 +625,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Electricity market basics</p>
+        <p class="prev-next-title">Electricity Market Basics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -506,7 +647,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-value-of-money">Time Value of Money</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interest">Interest</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#present-value-future-value-and-the-discount-factor">Present Value, Future Value, and the Discount Factor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#net-present-value">Net Present Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#including-environmental-impacts">Including environmental impacts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return-on-investment-roi">Return on Investment (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-of-electricity">Cost of electricity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levelised-cost-of-electricity-lcoe">Levelised cost of electricity (LCOE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-of-renewable-generation">Cost of renewable generation</a></li>
 </ul>
   </nav></div>
 

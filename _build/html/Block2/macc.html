@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Marginal Abatement Cost Curve &#8212; Energy and Environmental Economics</title>
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Block2/macc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Environmental cost benefit analysis" href="cba.html" />
-    <link rel="prev" title="Environmental economics tools" href="policy.html" />
+    <link rel="next" title="Cost Benefit Analysis" href="cba.html" />
+    <link rel="prev" title="Tools for Environmental Economics" href="policy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -177,15 +177,16 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Environmental Economics</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="policy.html">Environmental economics tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy.html">Tools for Environmental Economics</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Marginal Abatement Cost Curve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cba.html">Environmental cost benefit analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cba.html">Cost Benefit Analysis</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electricity Markets</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Energy Markets</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_market_basics.html">Electricity market basics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_grids.html">Electricity grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_investment.html">Investment in electricity markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_market_basics.html">Electricity Market Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_investment.html">Investment and Renewable Energy Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/electricity_grids.html">Electricity Grids</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Block3/sector_coupling.html">Sector Coupling</a></li>
 </ul>
 
     </div>
@@ -426,9 +427,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="marginal-abatement-cost-curve">
 <h1>Marginal Abatement Cost Curve<a class="headerlink" href="#marginal-abatement-cost-curve" title="Permalink to this heading">#</a></h1>
-<p>As you have learned in the previous section, externalities play a crucial role in environmental issues especially as an economic tool for considering pollution. This week we will explore the Marginal Abatement Cost Curve (MACC) which serves as a pivotal tool in addressing these externalities by providing a systematic approach to evaluating the cost-effectiveness of various pollution reduction measures.</p>
-<p>Given the negative externalities associated with pollution, there is a collective need to reduce it. This reduction, however, entails costs for the entities responsible for the pollution. The challenge lies in finding the most efficient and economically viable ways to decrease pollution while considering the broader social and environmental context. The Marginal Abatement Cost Curve is a tool used to navigate this challenge. It systematically organises and evaluates different pollution reduction measures based on their cost-effectiveness. The curve illustrates the relationship between the quantity of pollution reduced and the associated costs for each method.</p>
-<p>The MAC Curve ranks pollution reduction methods from the most to least cost-effective. Methods positioned at the beginning of the curve represent measures that can achieve significant pollution reduction at a relatively low cost. This efficiency is crucial in addressing externalities since it allows for the reduction of negative environmental impacts without imposing an undue economic burden on polluting entities.</p>
+<p>As you have learned in the previous section, externalities play a crucial role in environmental issues especially as an economic tool for considering pollution. This week we will explore the <strong>Marginal Abatement Cost Curve (MACC)</strong> which serves as a pivotal tool in addressing these externalities by providing a systematic approach to evaluating the cost-effectiveness of various pollution reduction options.</p>
+<p>Given the negative externalities associated with pollution, there is a collective need to reduce it. This reduction, however, entails costs for the entities responsible for the pollution. The challenge lies in finding the most efficient and economically viable ways to decrease pollution while considering the broader social and environmental context. The MACC is a tool used to navigate this challenge. It systematically organises and evaluates different pollution reduction measures based on their cost-effectiveness. The curve illustrates the relationship between the quantity of pollution reduced and the associated costs for each method.</p>
+<p>The MACC ranks pollution reduction methods from the most to least cost-effective. Methods positioned at the beginning of the curve represent measures that can achieve significant pollution reduction at a relatively low cost. This efficiency is crucial in addressing externalities since it allows for the reduction of negative environmental impacts without imposing an undue economic burden on polluting entities.</p>
 <section id="marginal-cost-and-emissions">
 <h2>Marginal cost and emissions<a class="headerlink" href="#marginal-cost-and-emissions" title="Permalink to this heading">#</a></h2>
 <p>In Block 1 we have seen how marginal pricing influences choices for consumers and producers in competitive markets.</p>
@@ -457,13 +458,19 @@ document.write(`
 <p>A carbon tax serves as a lever, to internalise the costs of the supplier’s carbon emissions, and consequently, incentivises implementing carbon reduction measures.</p>
 <p>Using the graph below, you can explore how different carbon tax rates and carbon emission levels influence the choice of carbon reduction options implemented.</p>
 <p>Play with the levels of carbon tax and see if you understand how this influences the choice of carbon reduction option if you can only pick one? Does your answer change when you can pick multiple options? How sensitive are the results to changes in the carbon tax rate?</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
 <span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/macc-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
@@ -481,7 +488,7 @@ document.write(`
 <section id="market-wide-marginal-abatement-cost-curve-macc">
 <h2>Market-wide marginal abatement cost curve (MACC)<a class="headerlink" href="#market-wide-marginal-abatement-cost-curve-macc" title="Permalink to this heading">#</a></h2>
 <p>Now, let’s look at it from the perspective of someone studying government policies. Think of it like this on a larger scale for the whole market. Just like companies have their own specific costs for reducing emissions, society as a whole has its own cost. An environmental data science team, through research on policies and technologies, can figure out how much we can reduce emissions and the costs involved for different things like electric cars, wind and solar power, rules about fuels, and projects that take care of the land. With this info, public policies can focus on adopting the technologies that are not too expensive first, kind of like picking the easiest and cheapest options to make a positive impact on the environment.</p>
-<p>This graph is a famous MAC from 2009 by McKinsey, each rectangle stands for a specific thing we can do, like using LED lights or putting Carbon Capture Systems in old coal plants. If a rectangle is wider, it means we can reduce more emissions with that action. If it’s taller, it means that action is more expensive. One side shows how much we can reduce emissions (that’s the x-axis), and the other side shows the cost (in euros per ton of CO2, that’s the y-axis).</p>
+<p>This graph is a famous MACC from 2009 by McKinsey, each rectangle stands for a specific thing we can do, like using LED lights or putting Carbon Capture Systems in old coal plants. If a rectangle is wider, it means we can reduce more emissions with that action. If it’s taller, it means that action is more expensive. One side shows how much we can reduce emissions (that’s the x-axis), and the other side shows the cost (in euros per ton of CO2, that’s the y-axis).</p>
 <p>It’s a big deal because it shows the trade-offs in one picture for greenhouse gas emissions from different places and all around the world. So, someone making rules or coming up with new ideas or even someone investing money can look at this and decide to focus on things where we can cut down on emissions without spending too much.</p>
 <p><img alt="mckinsey" src="../_images/McKinsey_Cost_Curve_670w.png" /></p>
 <p>Looking at the chart above, something that might catch your attention is the idea of negative costs, which can be a bit surprising. Let’s take LEDs, for example (they show about - €100 per ton of CO2). This negative cost means that for every investment that reduces CO2 from traditional lighting by 1 ton, the investor actually saves €100. Basically, it’s like saying you get money back for doing something good for the environment. In a way, these are investments that make sense not just for the environment but also for saving money. One reason people might not jump to buy things like $5 LED light bulbs, even though they’re good for the environment, is because it’s sometimes hard to see the long-term benefits when we’re thinking about short-term decisions.</p>
@@ -527,7 +534,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Environmental economics tools</p>
+        <p class="prev-next-title">Tools for Environmental Economics</p>
       </div>
     </a>
     <a class="right-next"
@@ -535,7 +542,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Environmental cost benefit analysis</p>
+        <p class="prev-next-title">Cost Benefit Analysis</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

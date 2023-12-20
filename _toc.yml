@@ -14,11 +14,12 @@ parts:
     - file: Block2/policy
     - file: Block2/macc
     - file: Block2/cba
-  - caption: Electricity Markets
+  - caption: Energy Markets
     chapters:
     - file: Block3/electricity_market_basics
-    - file: Block3/electricity_grids
     - file: Block3/electricity_investment
+    - file: Block3/electricity_grids
+    - file: Block3/sector_coupling
 # - caption: Extra
 #   chapters:
 #   - file: markdown
