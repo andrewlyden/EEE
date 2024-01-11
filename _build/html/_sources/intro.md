@@ -15,5 +15,3 @@ On successful completion of this course, you should be able to:
 3. Critically discuss previous, existing, and potential future pollution control measures.
 4. Understand and critically evaluate the functioning of different types of energy markets, future challenges to these markets, and their relevance to engineering problems.
 5. Describe and discuss important ethical issues in energy markets and environmental valuation, and their implications for good practice and policy.
-
-Refer to this for help - https://jupyterbook.org/en/stable/start/publish.html.

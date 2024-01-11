@@ -66,7 +66,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Block3/electricity_grids';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sector Coupling" href="sector_coupling.html" />
     <link rel="prev" title="Investment and Renewable Energy Support" href="electricity_investment.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,7 +183,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="electricity_market_basics.html">Electricity Market Basics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="electricity_investment.html">Investment and Renewable Energy Support</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Electricity Grids</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sector_coupling.html">Sector Coupling</a></li>
 </ul>
 
     </div>
@@ -410,6 +408,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-pricing">Uniform pricing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bidding-strategies-in-redispatch">Bidding strategies in redispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nodal-pricing">Nodal pricing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-pricing">Zonal pricing</a></li>
 </ul>
             </nav>
         </div>
@@ -435,33 +436,43 @@ document.write(`
 <li><p>Sometimes grid operators also run the market - i.e. the platforms which electricity market participants use to trade.
 (as well as a number of other things).</p></li>
 </ul>
-<p>In this notebook, we’ll focus on congestion management. The economics element of the other tasks is easier - e.g. for reserves, TSOs simply need to figure out how much they need (which isn’t straightforward at all but not primarily an economics problem) and invite generators to bid, for instance, the amount of money they would need to provide this reserve capacity. The TSO can then select the cheapest generators. Congestion management is harder because it is intimately related to the design of wholesale markets itself. There are roughly speaking, three approaches. Most European markets have a market design which is sometimes called uniform pricing or copperplate pricing in which physical networks are ignored by the market and TSOs manage congestion afterwards. Most N and S American/Australian markets have a design called nodal pricing which incorporates physical constraints in the market itself. In between, Scandinavian countries (and some others) have a system called zonal pricing. We’ll go through these in turn to explore how markets and physical networks interact in each of them, and what the difference is. Finally, we’ll look at a more advanced issue that comes up primarily in nodal pricing markets, as a taster to show you what interesting areas for future research exist and just how complicated electricity markets can get.</p>
-<p>This is not an electrical engineering course, so like in the previous notebook we will conveniently ignore the intricacies of alternating current networks (and therefore, reactive power; markets for reactive power also exist) - instead I’ll use a DC approximation. As before, we will also confine ourselves to wholesale markets, which is where most of the action happens anyway.</p>
+<p>In this notebook, we’ll focus on congestion management. The economics element of the other tasks is easier - e.g. for reserves, TSOs simply need to figure out how much they need (which isn’t straightforward at all but not primarily an economics problem) and invite generators to bid, for instance, the amount of money they would need to provide this reserve capacity. The TSO can then select the cheapest generators. Congestion management is harder because it is intimately related to the design of wholesale markets itself. There are roughly speaking, three approaches. Most European markets have a market design which is sometimes called uniform pricing or copperplate pricing in which physical networks are ignored by the market and TSOs manage congestion afterwards. Most N and S American/Australian markets have a design called nodal pricing which incorporates physical constraints in the market itself. In between, Scandinavian countries (and some others) have a system called zonal pricing. We’ll go through these in turn to explore how markets and physical networks interact in each of them, and what the difference is.</p>
+<p>This is not an electrical engineering course, so we will conveniently ignore the intricacies of alternating current networks (and therefore, reactive power; markets for reactive power also exist) - instead I’ll use a DC approximation. We will also confine ourselves to wholesale markets, which is where most of the action happens anyway.</p>
 <section id="uniform-pricing">
 <h2>Uniform pricing<a class="headerlink" href="#uniform-pricing" title="Permalink to this heading">#</a></h2>
-<p>In a uniform pricing market, the electricity market ignores any physical constraints. Electricity can be traded from anywhere to anywhere, without any consideration of where it is produced or consumed. This means there is one single price for the entire market in each time period. Of course, this might result in power flows violating physical limits. Wholesale market participants therefore have to inform the system operator what they are planning to produce/consume, at gate closure, which is usually an hour (UK) to 15 minutes (some US markets) before delivery. After gate closure, the system operator calculates power flows, and if these are found to violate physical constraints, the system operator can redispatch generators - asking some to increase production, and some to decrease production (and paying them for this!), until flow limits are satisfied.</p>
-<p>The widget below lets you experiment with this. This is a snapshot model, which only considers one time period (1 hour long, such that MW=MWh as before). The system consists of three nodes, or buses, connected by three lines with equal reactances - you can set the line capacities. At each bus, there are two generators, one cheap, and one expensive. The market is assumed to be perfectly competitive - generators bid their costs. Demand is fixed (so completely inelastic). There are no start-up costs, unit commitment decisions, minimum run levels, etc.</p>
-<p>Demand at each bus is fixed (i.e. perfectly inelastic) and equal to 15MWh in this time period. The capacity of the expensive generators (g2, g4, g6) is large enough to never be a constraint. You can set the capacity of the cheaper generators (g1, g3, g5). Generation costs are:</p>
-<p>g1: £10/MWh
-g2: £40/MWh
-g3: £20/MWh
-g4: £50/MWh
-g5: £30/MWh
-g6: £60/MWh</p>
-<p>The figure on the left shows generation levels, demand, and line flows that are predicted at gate closure. Line flows are green if no constraints are violated, and red if they are. The figure on the right shows the amount of redispatch (e.g., if this is 5, it means that generator is asked to increase its production by 5MW; if it is -5 that generator is asked to decrease its production by 5MW) and the resulting line flows.</p>
-<p>Play around with this model. Do you understand why Do you understand why prices are what they are? When are redispatch costs the highest?</p>
-<div class="cell docutils container">
+<p>In a uniform pricing market, the wholesale electricity market ignores any physical constraints. Electricity can be traded from anywhere to anywhere, without any consideration of where it is produced or consumed. This means there is one single price for the entire market in each time period. Of course, this might result in power flows violating physical limits. Wholesale market participants therefore have to inform the system operator what they are planning to produce/consume, at gate closure, which is usually an hour (UK) to 15 minutes (some US markets) before delivery. After gate closure, the system operator calculates power flows, and if these are found to violate physical constraints, the system operator can redispatch generators - asking some to increase production, and some to decrease production (and paying them for this!), until flow limits are satisfied.</p>
+<p>This can be considered a two stage process:- 1) Wholesale market without network constraints, and 2) Redispatch with network constraints.</p>
+<p>The widget below lets you experiment with this. This is a snapshot model, which only considers one time period (1 hour long, such that MW=MWh as before). The system consists of three nodes, or buses, connected by three lines with equal reactances - you can set the line capacities. At each bus, there are two generators, one cheap wind generator, and one expensive gas generator. The market is assumed to be perfectly competitive - generators bid their costs. Demand is fixed (so completely inelastic). There are no start-up costs, unit commitment decisions, minimum run levels, etc.</p>
+<p>Demand at each bus is fixed (i.e. perfectly inelastic), Scotland = 2000 MWh, Wales = 1000 MWh, and England = 4000 MWh.</p>
+<p>You can set the capacity of the wind and gas generators. Generation costs are set at 10.05 £/MWh for gas generation and 0 £/MWh for wind generation.</p>
+<p>The figure below shows the unified price which is the wholesale electricity price without network constraints at the top, and the redispatch stage below.</p>
+<p>Play around with this model.</p>
+<ul class="simple">
+<li><p>Try setting the transmission capacities to zero.</p></li>
+<li><p>Try changing the wind capacity and transmission capacities to achieve zero redispatch costs.</p></li>
+<li><p>Do you understand why prices are what they are?</p></li>
+<li><p>When are redispatch costs the highest?</p></li>
+</ul>
+<p>Note 1 - The gas capacities are set to the demand in order for the process to be feasible, you may get infeasible models if you set gas capacity too low and there is insufficient generation to meet demand.
+Note 2 - Wind generation is less than the wind capacity. Why is this? And can you identify the wind availability fraction for each country?</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
-<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">850</span><span class="p">)</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-1&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
         <iframe
             width="800"
-            height="850"
+            height="1850"
             src="https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-1"
             frameborder="0"
             allowfullscreen
@@ -469,6 +480,82 @@ g6: £60/MWh</p>
         ></iframe>
         </div></div>
 </div>
+</section>
+<section id="bidding-strategies-in-redispatch">
+<h2>Bidding strategies in redispatch<a class="headerlink" href="#bidding-strategies-in-redispatch" title="Permalink to this heading">#</a></h2>
+<p>The above example assumes that generators bids at the redispatch stage is at their marginal costs, however, in practice this is not always the case. Generators can bid to reduce their output at a price, and also offer to increase their generation for a higher price than marginal cost.</p>
+<p>The below widget is the same as the above, but with two key differences in assumptions.</p>
+<ul class="simple">
+<li><p>Ramping up a generator is twice as expensive as marginal cost.</p></li>
+<li><p>Generators need to be compensated for curtailing them or ramping them down at 50% of their marginal cost.</p></li>
+</ul>
+<p>Are the resultant dispatch costs higher or lower? Do you understand why? Compare with the costs with the widget above.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-2&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1850</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="800"
+            height="1850"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-2"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="nodal-pricing">
+<h2>Nodal pricing<a class="headerlink" href="#nodal-pricing" title="Permalink to this heading">#</a></h2>
+<p>In a nodal pricing market, all producers (generators) and consumers (utilities and large industrial consumers) submit their bids to a market operator (which might be, e.g., the ISO). These are generally block bids -i.e. combinations of prices and quantities. A generator might, for instance, say it’s willing to generate 10MW for an hour for £40/MWh, another 10 MW during the same hour for £45/MWh, etc. If markets are perfectly competitive, these bids will reflect costs/willingness to pay, i.e. together they will constitute a demand and supply curve. The market operator then solves and optimisation problem that maximises the social surplus. Importantly, this optimisation problem includes all network constraints. Having found the optimal dispatch, the market operator will then instruct the generators and consumers, telling them how much to generate. Generators are paid/consumers will pay the local marginal cost of electricity, called the locational marginal price (LMP) or nodal price. These prices can be different at every single bus in the network. While most European electricity markets use uniform pricing, most US markets use nodal pricing.</p>
+<p>If there are no network constraints anywhere, the marginal cost of electricity (i.e. the cost of the last unit generated) will be equal everywhere - it will be the marginal cost of the cheapest generator that still has availability. However, if there are constrained lines, there will be price differences. If a bus is export-constrained, i.e. low-cost generation is available locally but flows going out of the bus cannot be increased without violating line limits, LMPs at that bus will be low. If a bus is import-constrained, i.e. there is demand but no local low-cost generation and power cannot be brought in from the rest of the network, LMPs will be high.</p>
+<p>The model below will let you explore this - the setting is the same as in the model above, but prices (i.e. marginal costs) are now calculated at every bus at the first stage. When are they equal? When are they different? Do you understand why - and why prices are what they are?</p>
+<p>A key question is how this differs to the redispatch stage? How does this differ under different bidding strategies? I.e., does nodal pricing have the same costs as the redispatch stage when generators bid differently to their marginal costs?</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-3&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="800"
+            height="1300"
+            src="https://eee-apps-836a08e1d2dd.herokuapp.com/electricity-grids-3"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="zonal-pricing">
+<h2>Zonal pricing<a class="headerlink" href="#zonal-pricing" title="Permalink to this heading">#</a></h2>
+<p>Zonal pricing, which is used in Northern Europe (arguably also on Europe as a whole, as while individual countries use uniform pricing, the cross-European market therefore has one price in each country), is somewhere in between uniform and nodal pricing. In zonal pricing (also called market splitting), not all constraints are incorporated in the market, but only a small number of major constraints. This allows for different prices in each zone (which consist of a number of buses), while congestion within zones is still managed by the system operator as in a uniform pricing market. Zones are pre-defined and do not generally change.</p>
+<p>Zonal pricing can approach the efficiency of nodal pricing if congestion always happens in the same places (i.e. the same lines are always congested) and the zones are defined such that this congestion happens at the boundaries between zones. This tends to be the case in radial networks. In highly meshed networks with a lot of renewables, congestion is likely to occur in different places at different times, depending on the patterns of renewable generation. E.g., on a given day, it might be very windy in one part of the country, causing export constraints from that region, while on the next they the wind might have dropped to zero while solar generation elsewhere is high, such that the constraints are elsewhere. In this case, it is difficult to define fixed zones, and zonal pricing might not work well. Nevertheless, zonal pricing appears to be the approach favoured in European electricity market design circles at the moment.</p>
+<p>The examples above have used the example of Great Britain (GB) and presented the simple model as nodal pricing, however, splitting the GB into 3 is more reflective of zonal pricing. Therefore, you can apply the above widget in the same way to understand zonal pricing.</p>
+<p>Below is a figure of the differences between these pricing structures for GB.</p>
+<p><img alt="locational_pricing" src="../_images/locational_pricing.png" /></p>
+<p>Source: Very interesting report on benefits of locational pricing in the UK - <a class="reference external" href="https://www.ofgem.gov.uk/sites/default/files/2023-10/Ofgem%20Report%20-%20Assessment%20of%20Locational%20Pricing%20in%20GB%20%28final%29.pdf">https://www.ofgem.gov.uk/sites/default/files/2023-10/Ofgem Report - Assessment of Locational Pricing in GB (final).pdf</a>.</p>
 </section>
 </section>
 
@@ -511,15 +598,6 @@ g6: £60/MWh</p>
         <p class="prev-next-title">Investment and Renewable Energy Support</p>
       </div>
     </a>
-    <a class="right-next"
-       href="sector_coupling.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sector Coupling</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -536,6 +614,9 @@ g6: £60/MWh</p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform-pricing">Uniform pricing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bidding-strategies-in-redispatch">Bidding strategies in redispatch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nodal-pricing">Nodal pricing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zonal-pricing">Zonal pricing</a></li>
 </ul>
   </nav></div>
 
