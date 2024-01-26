@@ -638,10 +638,10 @@ $<span class="math notranslate nohighlight">\(
 \]</div>
 <p>The first producer knows that this is what his follower will do. It gets to decide first, so it can plug the above quantity into its own profit function and then determine what its optimal quantity as leader should be:</p>
 <div class="math notranslate nohighlight">
-\[
-    \text{profit}_1 = &amp; (\text{demand intercept} + \text{demand slope} × (\text{quantity}_1 + \frac{\text{cost slope}_2 - \text{demand intercept} - \text{demand slope} × \text{quantity}_1}{2 × \text{demand slope}})) /
+\[\begin{split}
+    \text{profit}_1 = &amp; (\text{demand intercept} + \text{demand slope} × (\text{quantity}_1 + \frac{\text{cost slope}_2 - \text{demand intercept} - \text{demand slope} × \text{quantity}_1}{2 × \text{demand slope}})) \\
                       &amp; × \text{quantity}_1 - (\text{cost intercept}_1 + \text{cost slope}_1 × \text{quantity}_1)
-\]</div>
+\end{split}\]</div>
 <p>To determine the optimum, we need <span class="math notranslate nohighlight">\(\frac{\delta \text{ profit}_1}{\delta \text{ quantity}_1} \mid _{\text{optimal quantity}_2 = 0}\)</span>, i.e. the derivative of the above profit function is equal to zero. I will not do these derivations here (you can do them yourself if you want to get some practice), but you can use the diagram below to see the difference between the Cournot and Stackelberg equilibria. Which situation would you prefer if you were producer 1 or 2? How does this depend on the model parameters? Can you explain why?</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
